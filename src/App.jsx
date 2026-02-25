@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import SalesCopy from './components/SalesCopy';
 import Positioning from './components/Positioning';
 import UseCases from './components/UseCases';
 import Footer from './components/Footer';
@@ -12,6 +13,7 @@ function App() {
       <Navbar />
       <main>
         <Hero />
+        <SalesCopy />
         <Positioning />
         <UseCases />
       </main>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import LogoIcon from './LogoIcon';
 import './Hero.css';
 
 const Hero = () => {
@@ -15,29 +16,28 @@ const Hero = () => {
             <div className="container hero-container">
                 <motion.div
                     className="hero-content"
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                    transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                 >
-                    <motion.h1 className="hero-title">FlowOps Studio</motion.h1>
-                    <motion.p className="hero-tagline">
-                        Turning Interest into Outcomes
-                    </motion.p>
-                    <motion.p className="hero-subtext"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1, delay: 0.8 }}
-                    >
-                        We build conversion systems that turn demand into customers.
-                    </motion.p>
                     <motion.div
-                        className="hero-actions"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1, delay: 1 }}
+                        className="hero-logo-wrapper"
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
                     >
-                        <a href="#services" className="hero-btn primary-btn">Explore Systems</a>
+                        <LogoIcon size={140} className="hero-logo-large" />
                     </motion.div>
+                    <h1 className="hero-title">FlowOps <span style={{ fontWeight: 300 }}>Studio</span></h1>
+                    <p className="hero-tagline">
+                        Turning Interest into Outcomes
+                    </p>
+                    <p className="hero-subtext">
+                        We build conversion systems that turn demand into consistent outcomes.
+                    </p>
+                    <div className="hero-actions">
+                        <a href="#services" className="hero-btn primary-btn">Explore Systems</a>
+                    </div>
                 </motion.div>
             </div>
         </section>

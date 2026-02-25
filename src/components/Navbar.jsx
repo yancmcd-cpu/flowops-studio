@@ -1,5 +1,6 @@
 import React from 'react';
 import { Menu } from 'lucide-react';
+import LogoIcon from './LogoIcon';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -7,7 +8,8 @@ const Navbar = () => {
         <nav className="navbar">
             <div className="container nav-container">
                 <div className="logo">
-                    <span className="logo-text">FlowOps Studio</span>
+                    <LogoIcon size={32} className="logo-icon" />
+                    <span className="logo-text">FlowOps <span style={{ fontWeight: 400, opacity: 0.9 }}>Studio</span></span>
                 </div>
                 <div className="nav-links">
                     <a href="#services" className="nav-link">Services</a>

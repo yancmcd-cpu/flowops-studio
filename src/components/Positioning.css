@@ -1,85 +1,137 @@
+/* ─── Our Approach Section ─── */
+/* Light-themed section for contrast against the dark sections above/below */
+
 .positioning {
-    padding: 8rem 0;
-    background-color: var(--bg-primary);
+    padding: 9rem 0;
+    background: linear-gradient(160deg, #eaf5f4 0%, #e8eef6 50%, #e6f0f5 100%);
     position: relative;
+    overflow: hidden;
 }
 
-.section-header {
+/* Subtle decorative background shape */
+.positioning::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    right: -120px;
+    width: 480px;
+    height: 480px;
+    background: radial-gradient(circle, rgba(58, 175, 169, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.positioning::after {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: -100px;
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(91, 124, 255, 0.07) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* ── Header ── */
+.approach-header {
     text-align: center;
     margin-bottom: 5rem;
 }
 
-.section-header h2 {
+.approach-title {
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 700;
-    color: var(--text-main);
+    color: #2a3a4e;
     letter-spacing: -0.02em;
 }
 
-.features-grid {
+/* ── Grid ── */
+.principles-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-}
-
-.feature-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    padding: 3rem 2rem;
+    gap: 2.5rem;
     position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
     z-index: 1;
 }
 
-.icon-wrapper {
+/* ── Principle Cards ── */
+.principle-card {
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(58, 175, 169, 0.15);
+    border-radius: 24px;
+    padding: 3.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 28px rgba(0, 0, 0, 0.06);
+}
+
+.principle-card:hover {
+    box-shadow: 0 12px 40px rgba(58, 175, 169, 0.12);
+    transform: translateY(-4px);
+}
+
+/* ── Icon ── */
+.principle-icon-wrapper {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 64px;
-    height: 64px;
-    border-radius: 16px;
-    background: rgba(58, 175, 169, 0.1);
-    margin-bottom: 2rem;
-    border: 1px solid rgba(58, 175, 169, 0.2);
+    width: 68px;
+    height: 68px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(58, 175, 169, 0.14), rgba(91, 124, 255, 0.12));
+    border: 1px solid rgba(58, 175, 169, 0.25);
+    margin-bottom: 1.5rem;
 }
 
-.feature-icon {
-    color: var(--accent-primary);
+.principle-icon {
+    color: #3AAFA9;
 }
 
-.feature-card h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: var(--text-main);
+/* ── Principle Line (most dominant) ── */
+.principle-line {
+    font-size: clamp(1.35rem, 2.5vw, 1.6rem);
+    font-weight: 700;
+    color: #1a2a3a;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 0;
 }
 
-.feature-card p {
-    color: var(--text-secondary);
+/* ── Body Copy ── */
+.principle-body {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: rgba(30, 45, 61, 0.88);
     line-height: 1.7;
-    font-size: 1.05rem;
+    margin: 0.25rem 0 0;
 }
 
-.card-glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 50% 0%, rgba(58, 175, 169, 0.1) 0%, transparent 60%);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    z-index: -1;
-    pointer-events: none;
+/* ── Micro Copy (quietest element) ── */
+.principle-micro {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: rgba(30, 45, 61, 0.55);
+    margin-top: 0.75rem;
+    letter-spacing: 0.01em;
 }
 
-.feature-card:hover {
-    border-color: rgba(58, 175, 169, 0.3);
-    background: rgba(255, 255, 255, 0.03);
-}
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .positioning {
+        padding: 6rem 0;
+    }
 
-.feature-card:hover .card-glow {
-    opacity: 1;
+    .approach-header {
+        margin-bottom: 3.5rem;
+    }
+
+    .principle-card {
+        padding: 2.5rem 2rem;
+    }
 }

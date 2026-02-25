@@ -1,23 +1,26 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Settings, BarChart, Zap } from 'lucide-react';
+import { Compass, Target, FlaskConical } from 'lucide-react';
 import './Positioning.css';
 
-const features = [
+const principles = [
     {
-        icon: <Settings size={32} className="feature-icon" />,
-        title: "A systems builder",
-        description: "We design robust, scalable ecosystems that connect your tools, automate workflows, and eliminate bottlenecks."
+        icon: <Compass size={34} strokeWidth={1.5} className="principle-icon" />,
+        principle: "Clarity before tools",
+        body: "We design the process first — then support it with the right tools, not the other way around.",
+        micro: "The system defines the software."
     },
     {
-        icon: <BarChart size={32} className="feature-icon" />,
-        title: "A conversion-focused operations partner",
-        description: "Every operational change is geared towards maximizing your bottom line and ensuring a seamless booking process."
+        icon: <Target size={34} strokeWidth={1.5} className="principle-icon" />,
+        principle: "Outcomes over activity",
+        body: "We focus on changes that improve results — not activity that looks impressive.",
+        micro: "Progress over noise."
     },
     {
-        icon: <Zap size={32} className="feature-icon" />,
-        title: "Validation-first, automation later",
-        description: "We test and prove your processes work perfectly before we build the automated systems to scale them."
+        icon: <FlaskConical size={34} strokeWidth={1.5} className="principle-icon" />,
+        principle: "Proven manually, then scaled",
+        body: "We validate what works in the real world before automating it.",
+        micro: "Scale amplifies what's already proven."
     }
 ];
 
@@ -25,34 +28,32 @@ const Positioning = () => {
     return (
         <section id="services" className="positioning">
             <div className="container">
-                <div className="section-header">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                    >
-                        How We Operate
-                    </motion.h2>
-                </div>
+                <motion.div
+                    className="approach-header"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                >
+                    <h2 className="approach-title">Our Approach</h2>
+                </motion.div>
 
-                <div className="features-grid">
-                    {features.map((feature, index) => (
+                <div className="principles-grid">
+                    {principles.map((item, index) => (
                         <motion.div
                             key={index}
-                            className="feature-card"
-                            initial={{ opacity: 0, y: 40 }}
+                            className="principle-card"
+                            initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: index * 0.2 }}
+                            transition={{ duration: 0.7, delay: index * 0.15 }}
                             viewport={{ once: true, margin: "-50px" }}
-                            whileHover={{ y: -5, transition: { duration: 0.2 } }}
                         >
-                            <div className="icon-wrapper">
-                                {feature.icon}
+                            <div className="principle-icon-wrapper">
+                                {item.icon}
                             </div>
-                            <h3>{feature.title}</h3>
-                            <p>{feature.description}</p>
-                            <div className="card-glow"></div>
+                            <h3 className="principle-line">{item.principle}</h3>
+                            <p className="principle-body">{item.body}</p>
+                            <span className="principle-micro">{item.micro}</span>
                         </motion.div>
                     ))}
                 </div>

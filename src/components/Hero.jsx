@@ -28,7 +28,7 @@ const Hero = () => {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 1, delay: 0.8 }}
                     >
-                        We build conversion systems that capture interest and convert to bookings — validated manually before scaling via automation.
+                        We build conversion systems that turn demand into customers.
                     </motion.p>
                     <motion.div
                         className="hero-actions"

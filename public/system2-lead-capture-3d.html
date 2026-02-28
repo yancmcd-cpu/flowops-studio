@@ -164,7 +164,7 @@
         const CAM_DIR_S2 = new THREE.Vector3(0, 4.3, 5.2).normalize();
 
         function fitCameraToContent() {
-            const isMobile = window.outerWidth <= 768;
+            const isMobile = window.innerWidth <= 768;
             if (!isMobile || nodeGroups.length === 0) return;
 
             const cw = mount.clientWidth || window.innerWidth;

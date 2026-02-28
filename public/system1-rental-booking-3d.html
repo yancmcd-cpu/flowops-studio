@@ -147,9 +147,10 @@
             const h = mount.clientHeight || window.innerHeight;
             const a = w / h;
             // Pull camera back on small screens (mobile)
+            // Using a tighter multiplier to ensure it is sufficiently zoomed in.
             const ds = Math.max(1.0, 720 / Math.max(w, 300));
             if (a < 0.85) {
-                camera.position.set(0, 4.3 * ds, 4.7 * ds);
+                camera.position.set(0, 3.2 * ds, 3.8 * ds);
             } else {
                 camera.position.set(0, 3.8 * ds, 4.8 * ds);
             }

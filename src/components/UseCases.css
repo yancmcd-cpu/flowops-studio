@@ -36,10 +36,13 @@
 
 /* ─── Two-column desktop layout ─────────────────────────── */
 .how-it-works-grid {
-    display: grid;
-    grid-template-columns: 1fr 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
     gap: 6rem;
-    align-items: start;
 }
 
 /* ─── Systems list (left col) ───────────────────────────── */
@@ -54,6 +57,23 @@
     display: flex;
     flex-direction: column;
     gap: 1.75rem;
+    position: sticky;
+    top: 6rem;
+    background-color: var(--bg-primary);
+    padding-bottom: 2rem;
+    z-index: 10;
+}
+
+.system-block:nth-child(1) {
+    z-index: 11;
+}
+
+.system-block:nth-child(2) {
+    z-index: 12;
+}
+
+.system-block:nth-child(3) {
+    z-index: 13;
 }
 
 /* ─── System heading & subheading above the frame ──────── */
@@ -103,8 +123,6 @@
 
 /* ─── Steps panel (right col, sticky) ──────────────────── */
 .steps-panel {
-    position: sticky;
-    top: 7rem;
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
@@ -173,33 +191,6 @@
 }
 
 /* ─── Responsive ────────────────────────────────────────── */
-@media (max-width: 1024px) {
-    .how-it-works-grid {
-        grid-template-columns: 1fr;
-        gap: 0;
-    }
-
-    .steps-panel {
-        position: static;
-        order: -1;
-        margin-bottom: 5rem;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 2rem;
-    }
-
-    .steps-heading {
-        width: 100%;
-    }
-
-    .step-item {
-        flex: 1 1 200px;
-    }
-
-    .steps-cta {
-        width: 100%;
-    }
-}
 
 @media (max-width: 768px) {
     .use-cases {
@@ -216,6 +207,12 @@
 
     .systems-list {
         gap: 5rem;
+    }
+
+    /* Disable sticky scroll on mobile */
+    .system-block {
+        position: static;
+        padding-bottom: 0;
     }
 
     .system-meta h3 {
@@ -249,6 +246,8 @@
 
 /* ─── Outcomes proof block (below 3rd animation) ─────────── */
 .outcomes-proof-block {
+    position: relative;
+    z-index: 14;
     width: 100%;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.06);

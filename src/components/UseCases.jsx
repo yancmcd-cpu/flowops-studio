@@ -100,8 +100,10 @@ const UseCases = () => {
                                 </motion.div>
                             </div>
                         ))}
+                    </div>
 
-                        {/* Proof block — directly below 3rd animation box */}
+                    {/* Proof block — moved outside systems-list to stop sticky overlap */}
+                    <div className="outcomes-proof-block-wrapper" style={{ width: '100%', position: 'relative', zIndex: 14 }}>
                         <motion.div
                             className="outcomes-proof-block"
                             initial={{ opacity: 0, y: 40 }}
@@ -116,7 +118,6 @@ const UseCases = () => {
                                 <li>Higher-quality conversions without increasing ad spend</li>
                             </ul>
                         </motion.div>
-
                     </div>
 
                     {/* RIGHT — 3 step explainer (sticky on desktop) */}

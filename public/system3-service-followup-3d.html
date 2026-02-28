@@ -145,16 +145,61 @@
         function setCameraForAspect() {
             const w = mount.clientWidth || window.innerWidth;
             const h = mount.clientHeight || window.innerHeight;
-            const a = w / h;
             const ds = Math.max(1.0, 720 / Math.max(w, 300));
-            if (a < 0.85) {
-                camera.position.set(0, 3.4 * ds, 3.8 * ds);
-            } else {
-                camera.position.set(0, 4.0 * ds, 4.8 * ds);
-            }
+            camera.fov = 72;
+            camera.updateProjectionMatrix();
+            camera.position.set(0, 4.0 * ds, 4.8 * ds);
         }
         setCameraForAspect();
         window.addEventListener('resize', setCameraForAspect);
+
+        /* ═══════ CONTENT GROUP (bounds target) ═══════════════════════ */
+        const contentGroup = new THREE.Group();
+        contentGroup.name = 'contentGroup';
+        scene.add(contentGroup);
+        let box3Helper = null;
+
+        /* ═══════ CAMERA FIT TO CONTENT (mobile, stateless direct formula) ══ */
+        const CAM_DIR_S3 = new THREE.Vector3(0, 4.0, 4.8).normalize();
+
+        function fitCameraToContent() {
+            const isMobile = window.outerWidth <= 768;
+            if (!isMobile || nodeGroups.length === 0) return;
+
+            const cw = mount.clientWidth || window.innerWidth;
+            const ch = mount.clientHeight || window.innerHeight;
+            const aspect = cw / ch;
+
+            camera.fov = 40;
+            camera.aspect = aspect;
+            camera.updateProjectionMatrix();
+
+            const wsBounds = new THREE.Box3();
+            nodeGroups.forEach(({ G }) => {
+                const p = G.position;
+                wsBounds.expandByPoint(new THREE.Vector3(p.x - 1.0, p.y - 0.5, p.z - 1.0));
+                wsBounds.expandByPoint(new THREE.Vector3(p.x + 1.0, p.y + 2.2, p.z + 1.0));
+            });
+            if (wsBounds.isEmpty()) return;
+
+            const center = wsBounds.getCenter(new THREE.Vector3());
+            const size = wsBounds.getSize(new THREE.Vector3());
+
+            const vHalf = camera.fov * (Math.PI / 180) / 2;
+            const hHalf = Math.atan(Math.tan(vHalf) * aspect);
+            const tilt = Math.atan2(4.0, 4.8);
+            const hExt = size.x / 2;
+            const vExt = Math.max(size.y, size.z * Math.sin(tilt)) / 2;
+            const margin = 1.04;
+            const dist = Math.max((hExt / Math.tan(hHalf)) * margin, (vExt / Math.tan(vHalf)) * margin);
+
+            camera.position.copy(center.clone().addScaledVector(CAM_DIR_S3, dist));
+            camera.lookAt(center);
+            camera.updateProjectionMatrix();
+
+            console.log('[S3 fit] size:', size.x.toFixed(2), size.y.toFixed(2), size.z.toFixed(2),
+                '| dist:', dist.toFixed(2), '| cam:', camera.position.toArray().map(v => v.toFixed(2)));
+        }
 
         /* ═══════════════════ LIGHTING (Cyan Accent) ══════════════════ */
         scene.add(new THREE.AmbientLight(0x0a1018, 5));
@@ -369,6 +414,7 @@
             NODES.forEach((n, i) => nodeMeshes.push(buildNode(n, positions[i], i)));
 
             buildPathsAndTravelers();
+            fitCameraToContent();
         }
 
         /* ═══════════════════ FLOW PATHS (sequential) ═════════════════ */

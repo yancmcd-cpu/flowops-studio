@@ -1,107 +1,85 @@
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
-import { Monitor, MessageSquare, Zap } from 'lucide-react';
+import { motion } from 'framer-motion';
 import './UseCases.css';
 
-const useCasesData = [
+const systems = [
     {
         id: 1,
-        title: "Website Creation",
-        description: "High-performance websites built for speed and engineered specifically to convert traffic into booked calls. Validation is our foundation.",
-        icon: <Monitor size={48} />,
-        color: "#3AAFA9", // Primary accent
-        features: ["Custom UI/UX", "Conversion Optimized", "SEO Foundations"]
+        title: "Property Rental Booking System",
+        sub: "Instantly respond, check availability, and confirm bookings without manual follow-up.",
+        src: "/system1-rental-booking-3d.html"
     },
     {
         id: 2,
-        title: "FB Messenger Auto-Responders",
-        description: "Intelligent messaging systems that instantly engage leads, answer common questions, and seamlessly guide prospects to your booking calendar.",
-        icon: <MessageSquare size={48} />,
-        color: "#5B7CFF", // Secondary accent
-        features: ["Instant Engagement", "Pre-qualification Routing", "Calendar Integration"]
+        title: "Website Lead Capture & Conversion System",
+        sub: "Capture enquiries, respond instantly, and move qualified leads through a structured follow-up flow.",
+        src: "/system2-lead-capture-3d.html"
     },
     {
         id: 3,
-        title: "End-to-End Automations",
-        description: "Connect your CRM, email marketing, and payment processors into one unified ecosystem that runs your operations in the background.",
-        icon: <Zap size={48} />,
-        color: "#94A3B8", // Neutral / Secondary
-        features: ["Zapier / Make Workflows", "Data Syncing", "Frictionless Operations"]
+        title: "Service Business Follow-Up System",
+        sub: "Automatically respond, schedule appointments, send reminders, and confirm attendance.",
+        src: "/system3-service-followup-3d.html"
     }
 ];
 
-const Card = ({ data, index, progress, targetScale }) => {
-    const containerRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ['start end', 'start start']
-    });
-
-    const imageScale = useTransform(scrollYProgress, [0, 1], [2, 1]);
-    const scale = useTransform(progress, [index * 0.25, 1], [1, targetScale]);
-
-    return (
-        <div ref={containerRef} className="use-case-card-container">
-            <motion.div
-                style={{ scale, top: `calc(-5vh + ${index * 40}px)` }}
-                className="use-case-card"
-            >
-                <div className="card-inner">
-                    <div className="card-content">
-                        <div className="card-icon" style={{ color: data.color }}>
-                            {data.icon}
-                        </div>
-                        <h2>{data.title}</h2>
-                        <p>{data.description}</p>
-                        <ul className="card-features">
-                            {data.features.map((feature, i) => (
-                                <li key={i}>
-                                    <Zap size={16} className="feature-bullet" style={{ color: data.color }} />
-                                    {feature}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div className="card-visual" style={{ background: `linear-gradient(135deg, ${data.color}20 0%, transparent 100%)` }}>
-                        <motion.div style={{ scale: imageScale }} className="visual-inner">
-                            <div className="abstract-shape" style={{ borderColor: data.color }}></div>
-                            <div className="abstract-shape secondary" style={{ borderColor: data.color }}></div>
-                        </motion.div>
-                    </div>
-                </div>
-            </motion.div>
-        </div>
-    )
-}
-
 const UseCases = () => {
-    const containerRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ['start start', 'end end']
-    });
-
     return (
-        <section className="use-cases" ref={containerRef} id="about">
-            <div className="container">
-                <div className="section-header">
+        <section className="use-cases" id="about">
+            <div className="use-cases-container">
+
+                {/* ── Section Header – animates like other headings ── */}
+                <motion.div
+                    className="section-header"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, ease: 'easeOut' }}
+                    viewport={{ once: true, margin: '-100px' }}
+                >
                     <h2>Our Systems in Action</h2>
-                    <p>Solutions built to capture interest and turn it into outcomes.</p>
-                </div>
-                <div className="cards-wrapper">
-                    {useCasesData.map((useCase, i) => {
-                        const targetScale = 1 - ((useCasesData.length - i) * 0.05);
-                        return (
-                            <Card
-                                key={useCase.id}
-                                data={useCase}
-                                index={i}
-                                progress={scrollYProgress}
-                                targetScale={targetScale}
-                            />
-                        )
-                    })}
+                    <p>
+                        Below are real automation flows we design and deploy to capture intent,
+                        respond instantly, and convert consistently.
+                    </p>
+                </motion.div>
+
+                <div className="systems-list">
+                    {systems.map((sys, index) => (
+                        <div className="system-block" key={sys.id}>
+
+                            {/* ── System heading – staggered like principle cards ── */}
+                            <motion.div
+                                className="system-meta"
+                                initial={{ opacity: 0, y: 25 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
+                                viewport={{ once: true, margin: '-60px' }}
+                            >
+                                <h3>{sys.title}</h3>
+                                <p>{sys.sub}</p>
+                            </motion.div>
+
+                            {/* ── iframe box – animates like the solution-box ── */}
+                            <motion.div
+                                className="system-frame-wrap"
+                                initial={{ opacity: 0, y: 40 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.9, ease: 'easeOut', delay: 0.2 }}
+                                viewport={{ once: true, margin: '-40px' }}
+                            >
+                                <iframe
+                                    src={sys.src}
+                                    title={sys.title}
+                                    className="system-frame"
+                                    loading="lazy"
+                                    scrolling="no"
+                                    frameBorder="0"
+                                    allowFullScreen
+                                />
+                            </motion.div>
+
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>

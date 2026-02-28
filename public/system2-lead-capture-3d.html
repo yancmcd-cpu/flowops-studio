@@ -85,6 +85,20 @@
         .label.active .s {
             color: rgba(91, 124, 255, 1);
         }
+
+        @media (max-width: 520px) {
+            .label .s {
+                display: none;
+            }
+
+            .label .t {
+                font-size: clamp(8px, 2.0vw, 14px);
+            }
+
+            .label {
+                padding: clamp(4px, 1.0vw, 7px) clamp(7px, 1.8vw, 12px);
+            }
+        }
     </style>
 </head>
 
@@ -133,7 +147,7 @@
             const w = mount.clientWidth || window.innerWidth;
             const h = mount.clientHeight || window.innerHeight;
             const a = w / h;
-            const ds = Math.max(1.0, 850 / Math.max(w, 300));
+            const ds = Math.max(1.0, 720 / Math.max(w, 300));
             if (a < 0.85) {
                 camera.position.set(0, 5.5 * ds, 6.0 * ds);
             } else {

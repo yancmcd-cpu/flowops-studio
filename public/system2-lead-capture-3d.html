@@ -130,11 +130,14 @@
         window.addEventListener('resize', resize);
 
         function setCameraForAspect() {
-            const a = (mount.clientWidth || window.innerWidth) / (mount.clientHeight || window.innerHeight);
-            if (a < 0.85) { // portrait
-                camera.position.set(0, 5.5, 6.0);
+            const w = mount.clientWidth || window.innerWidth;
+            const h = mount.clientHeight || window.innerHeight;
+            const a = w / h;
+            const ds = Math.max(1.0, 900 / Math.max(w, 300));
+            if (a < 0.85) {
+                camera.position.set(0, 5.5 * ds, 6.0 * ds);
             } else {
-                camera.position.set(0, 4.3, 5.2);
+                camera.position.set(0, 4.3 * ds, 5.2 * ds);
             }
         }
         setCameraForAspect();

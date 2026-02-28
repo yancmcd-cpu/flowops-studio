@@ -1,0 +1,57 @@
+# 3D Scene Designs for Website
+
+This document presents the visual previews and conceptual design notes for the three premium 3D animated system scenes. 
+
+The designs align with the requested **Global Style Direction**: true 3D (Spline-style / WebGL compatible), dark background, clean geometric forms, floating 3D objects, thin illuminated connecting lines, and a subtle glow in blue/cyan/purple tones. The lighting is intentionally restrained.
+
+---
+
+## SCENE 1 — Property Rental Booking System
+**Theme:** Enquiry → Response → Follow-Up → Booking
+
+![Scene 1: Property Rental Booking System](/C:/Users/yancm/.gemini/antigravity/brain/a96c885c-7398-4c48-84fd-68d82f89bbc1/scene_1_rental_1772214384996.png)
+
+### Design Choices
+*   **Visual Concept:** The scene is anchored by a floating 3D “Ad” panel that transitions into a booking flow. A subtle chat/message bubble object interacts with a response node exhibiting a soft cyan glow. A calendar object and a solid 3D checkmark indicate confirmation.
+*   **Motion Concept:** Light energy smoothly flows along the thin connecting lines between nodes. Each step activates briefly in sequence, with the final confirmation state increasing slightly in brightness. The loop is calm and intentional.
+*   **Lighting & Color:** Relies on a muted dark base. The light accents and glows are restrained primarily to the active connection paths and the edges of the primary geometry.
+
+---
+
+## SCENE 2 — Website Lead Capture System
+**Theme:** Visitor → Form → CRM → Follow-Up → Conversion
+
+![Scene 2: Website Lead Capture System](/C:/Users/yancm/.gemini/antigravity/brain/a96c885c-7398-4c48-84fd-68d82f89bbc1/scene_2_lead_1772214402733.png)
+
+### Design Choices
+*   **Visual Concept:** Features a stylized, floating website panel. A clean form card physically emerges slightly from the panel. Data streams (represented by glowing nodes along paths) flow into a dark, structured database object, followed by a conversion pulse indicator.
+*   **Motion Concept:** Smooth data motion travels along the paths into the CRM node. A subtle pulse of light illuminates when data reaches the database, finishing with a soft highlight upon conversion.
+*   **Lighting & Color:** Uses lighting sequentially to subtly guide the user's eye through the flow, visually separating the input, processing, and success stages while avoiding clutter.
+
+---
+
+## SCENE 3 — Service Business Follow-Up System
+**Theme:** Enquiry → Acknowledgement → Reminder → Appointment → Sale
+
+![Scene 3: Service Business Follow-Up System](/C:/Users/yancm/.gemini/antigravity/brain/a96c885c-7398-4c48-84fd-68d82f89bbc1/scene_3_service_1772214419330.png)
+
+### Design Choices
+*   **Visual Concept:** Shows a floating phone/message icon transitioning to an acknowledgement pulse. It includes a structured reminder signal object and a calendar object that completes at a softly glowing success node.
+*   **Motion Concept:** Subdued signals move along the connection lines between stages. A very slight, continuous camera drift adds depth. Active nodes pulse very gently, feeling like an operational system rather than playful illustration.
+*   **Lighting & Color:** Consistent with the other scenes, utilizing dark, glass-like frosted elements and precise rim-lighting.
+
+---
+
+## TECHNICAL & DELIVERY NOTES
+
+### Recommended Export Format
+*   **Spline (.splinecode) / WebGL:** For true 3D implementation in the browser, these scenes should be built in [Spline.design](https://spline.design/) or three.js.
+*   **React Integration:** Spline provides an `@splinetool/react-spline` package that makes it very simple to overlay and control 3D scenes within a React/Next.js application.
+
+### Performance and Responsiveness
+*   **Geometry:** Keep poly-counts extremely low. Use simple bevels rather than ultra-high resolution smoothed meshes.
+*   **Materials & Lighting:** Limit the number of active light sources. Rely heavily on "Matcap" materials or baked lighting with unlit glowing materials for the energy paths to ensure 60fps performance on mobile devices.
+*   **Responsiveness:** The 3D camera should be set to scale responsively. The models themselves should sit within a defined `div` container in the layout. For mobile screens, the camera Zoom should back out slightly to keep the full system visible without clipping.
+
+> [!NOTE] 
+> No website code has been generated yet. Please review these visual previews. Once the direction is approved, we can discuss implementing these via Spline or other WebGL libraries.

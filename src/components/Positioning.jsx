@@ -1,62 +1,73 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Compass, Target, FlaskConical } from 'lucide-react';
 import './Positioning.css';
 
-const principles = [
+const CALENDLY_LINK = 'CALENDLY_LINK_HERE';
+
+const services = [
     {
-        icon: <Compass size={34} strokeWidth={1.5} className="principle-icon" />,
-        principle: "Clarity before tools",
-        body: "We design the process first — then support it with the right tools, not the other way around.",
-        micro: "The system defines the software."
+        title: 'Conversion Systems',
+        body: 'End-to-end flows that turn attention into action.',
     },
     {
-        icon: <Target size={34} strokeWidth={1.5} className="principle-icon" />,
-        principle: "Outcomes over activity",
-        body: "We focus on changes that improve results — not activity that looks impressive.",
-        micro: "Progress over noise."
+        title: 'Landing Page Architecture',
+        body: 'Designed to guide, not decorate.',
     },
     {
-        icon: <FlaskConical size={34} strokeWidth={1.5} className="principle-icon" />,
-        principle: "Proven manually, then scaled",
-        body: "We validate what works in the real world before automating it.",
-        micro: "Scale amplifies what's already proven."
-    }
+        title: 'Campaign Infrastructure',
+        body: 'Built to support consistent acquisition.',
+    },
+    {
+        title: 'Automation & CRM Workflows',
+        body: 'Routing, follow-up, and qualification without manual overhead.',
+    },
 ];
 
 const Positioning = () => {
     return (
         <section id="services" className="positioning">
             <div className="container">
+
                 <motion.div
                     className="approach-header"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    viewport={{ once: true, margin: "-100px" }}
+                    viewport={{ once: true, margin: '-100px' }}
                 >
-                    <h2 className="approach-title">Our Approach</h2>
+                    <h2 className="approach-title">What We Build</h2>
                 </motion.div>
 
-                <div className="principles-grid">
-                    {principles.map((item, index) => (
+                <div className="services-grid">
+                    {services.map((svc, i) => (
                         <motion.div
-                            key={index}
-                            className="principle-card"
-                            initial={{ opacity: 0, y: 30 }}
+                            key={svc.title}
+                            className="service-block"
+                            initial={{ opacity: 0, y: 28 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.7, delay: index * 0.15 }}
-                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.65, delay: i * 0.12 }}
+                            viewport={{ once: true, margin: '-50px' }}
                         >
-                            <div className="principle-icon-wrapper">
-                                {item.icon}
-                            </div>
-                            <h3 className="principle-line">{item.principle}</h3>
-                            <p className="principle-body">{item.body}</p>
-                            <span className="principle-micro">{item.micro}</span>
+                            <h3 className="service-title">{svc.title}</h3>
+                            <p className="service-body">{svc.body}</p>
                         </motion.div>
                     ))}
                 </div>
+
+                <motion.div
+                    className="services-cta"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    viewport={{ once: true, margin: '-50px' }}
+                >
+                    <span className="services-cta-prompt">Ready to apply this to your business?</span>
+                    {' '}
+                    <a href={CALENDLY_LINK} className="services-cta-link" target="_blank" rel="noopener noreferrer">
+                        Start a Conversation →
+                    </a>
+                </motion.div>
+
             </div>
         </section>
     );

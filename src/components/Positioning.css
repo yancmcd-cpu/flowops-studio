@@ -1,137 +1,80 @@
-/* ─── Our Approach Section ─── */
-/* Light-themed section for contrast against the dark sections above/below */
-
+/* ─── Positioning — Services ────────────────────────────────── */
 .positioning {
-    padding: 9rem 0;
-    background: linear-gradient(160deg, #eaf5f4 0%, #e8eef6 50%, #e6f0f5 100%);
-    position: relative;
-    overflow: hidden;
+    background-color: #E8F2F5;
+    padding: 9rem 0 8rem;
 }
 
-/* Subtle decorative background shape */
-.positioning::before {
-    content: '';
-    position: absolute;
-    top: -80px;
-    right: -120px;
-    width: 480px;
-    height: 480px;
-    background: radial-gradient(circle, rgba(58, 175, 169, 0.08) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-}
-
-.positioning::after {
-    content: '';
-    position: absolute;
-    bottom: -80px;
-    left: -100px;
-    width: 380px;
-    height: 380px;
-    background: radial-gradient(circle, rgba(91, 124, 255, 0.07) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-}
-
-/* ── Header ── */
 .approach-header {
     text-align: center;
     margin-bottom: 5rem;
 }
 
 .approach-title {
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(2rem, 4vw, 2.75rem);
     font-weight: 700;
-    color: #2a3a4e;
-    letter-spacing: -0.02em;
+    color: #1E3A4A;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
 }
 
-/* ── Grid ── */
-.principles-grid {
+/* ─── Services grid ─────────────────────────────────────────── */
+.services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2.5rem;
-    position: relative;
-    z-index: 1;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 4rem;
+    max-width: 900px;
+    margin: 0 auto 4rem;
 }
 
-/* ── Principle Cards ── */
-.principle-card {
-    background: rgba(255, 255, 255, 0.82);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(58, 175, 169, 0.15);
-    border-radius: 24px;
-    padding: 3.5rem 3rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 28px rgba(0, 0, 0, 0.06);
+.service-block {
+    border-left: 2px solid rgba(58, 175, 169, 0.55);
+    padding-left: 1.5rem;
 }
 
-.principle-card:hover {
-    box-shadow: 0 12px 40px rgba(58, 175, 169, 0.12);
-    transform: translateY(-4px);
-}
-
-/* ── Icon ── */
-.principle-icon-wrapper {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 68px;
-    height: 68px;
-    border-radius: 18px;
-    background: linear-gradient(135deg, rgba(58, 175, 169, 0.14), rgba(91, 124, 255, 0.12));
-    border: 1px solid rgba(58, 175, 169, 0.25);
-    margin-bottom: 1.5rem;
-}
-
-.principle-icon {
-    color: #3AAFA9;
-}
-
-/* ── Principle Line (most dominant) ── */
-.principle-line {
-    font-size: clamp(1.35rem, 2.5vw, 1.6rem);
+.service-title {
+    font-size: 1.2rem;
     font-weight: 700;
-    color: #1a2a3a;
+    color: #1E3A4A;
     letter-spacing: -0.02em;
-    line-height: 1.2;
-    margin: 0;
+    margin-bottom: 0.5rem;
+    line-height: 1.25;
 }
 
-/* ── Body Copy ── */
-.principle-body {
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: rgba(30, 45, 61, 0.88);
-    line-height: 1.7;
-    margin: 0.25rem 0 0;
+.service-body {
+    font-size: 1rem;
+    color: #4A6778;
+    line-height: 1.6;
 }
 
-/* ── Micro Copy (quietest element) ── */
-.principle-micro {
-    display: block;
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: rgba(30, 45, 61, 0.55);
-    margin-top: 0.75rem;
-    letter-spacing: 0.01em;
+/* ─── Inline CTA ────────────────────────────────────────────── */
+.services-cta {
+    text-align: center;
+    font-size: 1.0625rem;
 }
 
-/* ── Responsive ── */
+.services-cta-prompt {
+    color: #4A6778;
+}
+
+.services-cta-link {
+    color: #2a9d96;
+    font-weight: 600;
+    margin-left: 0.5rem;
+    transition: opacity 0.2s ease;
+    text-decoration: none;
+}
+
+.services-cta-link:hover {
+    opacity: 0.75;
+}
+
 @media (max-width: 768px) {
     .positioning {
-        padding: 6rem 0;
+        padding: 6rem 0 5rem;
     }
 
-    .approach-header {
-        margin-bottom: 3.5rem;
-    }
-
-    .principle-card {
-        padding: 2.5rem 2rem;
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
 }

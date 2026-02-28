@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Scene 3: Service Business Follow-Up System</title>
+    <style>
+        body {
+            margin: 0;
+            background: #070709;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        .scene {
+            perspective: 1200px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, rgba(15, 30, 45, 0.4) 0%, transparent 70%);
+        }
+
+        .wrapper {
+            transform-style: preserve-3d;
+            transform: rotateX(20deg) rotateY(-20deg);
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            position: relative;
+            animation: hover 8s infinite alternate ease-in-out;
+        }
+
+        @keyframes hover {
+            0% {
+                transform: rotateX(20deg) rotateY(-20deg) translateY(0);
+            }
+
+            100% {
+                transform: rotateX(15deg) rotateY(-15deg) translateY(-20px);
+            }
+        }
+
+        .line {
+            position: absolute;
+            top: 50%;
+            left: 45px;
+            right: 45px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .energy {
+            width: 120px;
+            height: 100%;
+            background: #0088ff;
+            box-shadow: 0 0 20px #0088ff, 0 0 40px #0044ff;
+            filter: blur(2px);
+            animation: flow 4s infinite linear;
+            opacity: 0;
+        }
+
+        @keyframes flow {
+            0% {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(900px);
+                opacity: 0;
+            }
+        }
+
+        .node-container {
+            position: relative;
+            transform-style: preserve-3d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .node {
+            width: 100px;
+            height: 100px;
+            background: rgba(15, 18, 25, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .node::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), transparent);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .label {
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(20, 25, 35, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            backdrop-filter: blur(4px);
+            opacity: 0.5;
+            transition: all 0.5s ease;
+            pointer-events: none;
+        }
+
+        /* Specific Nodes styling to match images better */
+        .node-phone {
+            width: 70px;
+            height: 130px;
+            border-radius: 16px;
+        }
+
+        .node-ack {
+            border-radius: 50%;
+            width: 90px;
+            height: 90px;
+        }
+
+        .node-rem {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            transform: rotateZ(-10deg);
+        }
+
+        .node-cal {
+            border-radius: 12px;
+        }
+
+        .node-sale {
+            border-radius: 50%;
+            width: 110px;
+            height: 110px;
+            font-size: 32px;
+        }
+
+        /* Animation overrides */
+        .nc1 {
+            animation: p1 4s infinite linear;
+        }
+
+        .nc2 {
+            animation: p2 4s infinite linear;
+        }
+
+        .nc3 {
+            animation: p3 4s infinite linear;
+        }
+
+        .nc4 {
+            animation: p4 4s infinite linear;
+        }
+
+        .nc5 {
+            animation: p5 4s infinite linear;
+        }
+
+        @keyframes p1 {
+
+            0%,
+            100% {}
+
+            10%,
+            20% {
+                transform: translateZ(20px);
+            }
+        }
+
+        @keyframes p2 {
+
+            0%,
+            100% {}
+
+            30%,
+            40% {
+                transform: translateZ(20px);
+            }
+        }
+
+        @keyframes p3 {
+
+            0%,
+            100% {}
+
+            50%,
+            60% {
+                transform: translateZ(20px) scale(1.05);
+            }
+        }
+
+        @keyframes p4 {
+
+            0%,
+            100% {}
+
+            70%,
+            80% {
+                transform: translateZ(20px);
+            }
+        }
+
+        @keyframes p5 {
+
+            0%,
+            100% {}
+
+            90%,
+            95% {
+                transform: translateZ(30px) scale(1.1);
+            }
+        }
+
+        /* Inner Node glows */
+        .nc1 .node {
+            animation: glow1 4s infinite linear;
+        }
+
+        .nc1 .label {
+            animation: lglow1 4s infinite linear;
+        }
+
+        @keyframes glow1 {
+
+            0%,
+            10% {
+                border-color: rgba(255, 255, 255, 0.08);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+                color: rgba(255, 255, 255, 0.4);
+            }
+
+            15% {
+                border-color: #0088ff;
+                box-shadow: 0 0 40px rgba(0, 136, 255, 0.3);
+                color: #fff;
+            }
+
+            20%,
+            100% {
+                border-color: rgba(255, 255, 255, 0.08);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+                color: rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        @keyframes lglow1 {
+
+            0%,
+            10% {
+                opacity: 0.5;
+                color: rgba(255, 255, 255, 0.6);
+            }
+
+            15% {
+                opacity: 1;
+                color: #fff;
+                text-shadow: 0 0 8px rgba(0, 136, 255, 0.5);
+                border-color: rgba(0, 136, 255, 0.3);
+            }
+
+            20%,
+            100% {
+                opacity: 0.5;
+                color: rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        .nc2 .node {
+            animation: glow2 4s infinite linear;
+        }
+
+        .nc2 .label {
+            animation: lglow2 4s infinite linear;
+        }
+
+        @keyframes glow2 {
+
+            0%,
+            30% {
+                border-color: rgba(255, 255, 255, 0.08);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+                color: rgba(255, 255, 255, 0.4);
+            }
+
+            35% {
+                border-color: #0088ff;
+                box-shadow: 0 0 40px rgba(0, 136, 255, 0.3);
+                color: #fff;
+            }
+
+            40%,
+            100% {
+                border-color: rgba(255, 255, 255, 0.08);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+                color: rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        @keyframes lglow2 {
+
+            0%,
+            30% {
+                opacity: 0.5;
+                color: rgba(255, 255, 255, 0.6);
+            }
+
+            35% {
+                opacity: 1;
+                color: #fff;
+                text-shadow: 0 0 8px rgba(0, 136, 255, 0.5);
+                border-color: rgba(0, 136, 255, 0.3);
+            }
+
+            40%,
+            100% {
+                opacity: 0.5;
+                color: rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        .nc3 .node {
+            animation: glow3 4s infinite linear;
+        }
+
+        .nc3 .label {
+            animation: lglow3 4s infinite linear;
+        }
+
+        @keyframes glow3 {
+
+            0%,
+            50% {
+                border-color: rgba(255, 255, 255, 0.08);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+                color: rgba(255, 255, 255, 0.4);
+            }
+
+            55% {
+                border-color: #0088ff;
+                box-shadow: 0 0 40px rgba(0, 136, 255, 0.4);
+                color: #fff;
+            }
+
+            60%,
+            100% {
+                border-color: rgba(255, 255, 255, 0.08);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+                color: rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        @keyframes lglow3 {
+
+            0%,
+            50% {
+                opacity: 0.5;
+                color: rgba(255, 255, 255, 0.6);
+            }
+
+            55% {
+                opacity: 1;
+                color: #fff;
+                text-shadow: 0 0 8px rgba(0, 136, 255, 0.5);
+                border-color: rgba(0, 136, 255, 0.3);
+            }
+
+            60%,
+            100% {
+                opacity: 0.5;
+                color: rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        .nc4 .node {
+            animation: glow4 4s infinite linear;
+        }
+
+        .nc4 .label {
+            animation: lglow4 4s infinite linear;
+        }
+
+        @keyframes glow4 {
+
+            0%,
+            70% {
+                border-color: rgba(255, 255, 255, 0.08);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+                color: rgba(255, 255, 255, 0.4);
+            }
+
+            75% {
+                border-color: #0088ff;
+                box-shadow: 0 0 40px rgba(0, 136, 255, 0.3);
+                color: #fff;
+            }
+
+            80%,
+            100% {
+                border-color: rgba(255, 255, 255, 0.08);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+                color: rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        @keyframes lglow4 {
+
+            0%,
+            70% {
+                opacity: 0.5;
+                color: rgba(255, 255, 255, 0.6);
+            }
+
+            75% {
+                opacity: 1;
+                color: #fff;
+                text-shadow: 0 0 8px rgba(0, 136, 255, 0.5);
+                border-color: rgba(0, 136, 255, 0.3);
+            }
+
+            80%,
+            100% {
+                opacity: 0.5;
+                color: rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        .nc5 .node {
+            animation: glow5 4s infinite linear;
+        }
+
+        .nc5 .label {
+            animation: lglow5 4s infinite linear;
+        }
+
+        @keyframes glow5 {
+
+            0%,
+            85% {
+                border-color: rgba(255, 255, 255, 0.08);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+                color: rgba(255, 255, 255, 0.4);
+                background: rgba(15, 18, 25, 0.8);
+            }
+
+            90%,
+            95% {
+                border-color: #00ff96;
+                box-shadow: 0 0 50px rgba(0, 255, 150, 0.5);
+                color: #fff;
+                background: rgba(20, 50, 40, 0.9);
+            }
+
+            100% {
+                border-color: rgba(255, 255, 255, 0.08);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+                color: rgba(255, 255, 255, 0.4);
+                background: rgba(15, 18, 25, 0.8);
+            }
+        }
+
+        @keyframes lglow5 {
+
+            0%,
+            85% {
+                opacity: 0.5;
+                color: rgba(255, 255, 255, 0.6);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+
+            90%,
+            95% {
+                opacity: 1;
+                color: #fff;
+                text-shadow: 0 0 8px rgba(0, 255, 150, 0.5);
+                border-color: rgba(0, 255, 150, 0.4);
+            }
+
+            100% {
+                opacity: 0.5;
+                color: rgba(255, 255, 255, 0.6);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="scene">
+        <div class="wrapper">
+            <div class="line">
+                <div class="energy"></div>
+            </div>
+
+            <div class="node-container nc1">
+                <div class="label">Call / Message</div>
+                <div class="node node-phone">📱</div>
+            </div>
+
+            <div class="node-container nc2">
+                <div class="label">Acknowledgement</div>
+                <div class="node node-ack">🔔</div>
+            </div>
+
+            <div class="node-container nc3">
+                <div class="label">Reminder</div>
+                <div class="node node-rem">⏳</div>
+            </div>
+
+            <div class="node-container nc4">
+                <div class="label">Appointment</div>
+                <div class="node node-cal">📅</div>
+            </div>
+
+            <div class="node-container nc5">
+                <div class="label">Sale</div>
+                <div class="node node-sale">✓</div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

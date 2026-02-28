@@ -1,31 +1,39 @@
 import React from 'react';
 import './Footer.css';
 
+const CALENDLY_LINK = 'CALENDLY_LINK_HERE';
+
 const Footer = () => {
     return (
         <footer className="footer">
             <div className="container footer-container">
+
                 <div className="footer-top">
+                    {/* Brand block */}
                     <div className="footer-brand">
-                        <h2>FlowOps Studio</h2>
-                        <p className="footer-tagline">Turning interest into outcomes.</p>
+                        <h2 className="footer-brand-title">FlowOps Studio</h2>
+                        <p className="footer-tagline">Systems that turn interest into outcomes.</p>
                     </div>
-                    <div className="footer-links">
-                        <div className="link-group">
-                            <h4>Navigation</h4>
-                            <a href="#services">Services</a>
-                            <a href="#about">About</a>
-                        </div>
-                        <div className="link-group">
-                            <h4>Socials</h4>
-                            <a href="#">Twitter</a>
-                            <a href="#">LinkedIn</a>
-                        </div>
-                    </div>
+
+                    {/* Links */}
+                    <nav className="footer-nav" aria-label="Footer navigation">
+                        <a href="#how-it-works" className="footer-link">How It Works</a>
+                        <a href="#services" className="footer-link">Services</a>
+                        <a
+                            href={CALENDLY_LINK}
+                            className="footer-link footer-cta-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Start a Conversation →
+                        </a>
+                    </nav>
                 </div>
+
                 <div className="footer-bottom">
-                    <p>&copy; {new Date().getFullYear()} FlowOps Studio. All rights reserved.</p>
+                    <p>© 2026 FlowOps Studio. All rights reserved.</p>
                 </div>
+
             </div>
         </footer>
     );

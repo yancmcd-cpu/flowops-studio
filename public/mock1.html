@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Animated System Flow Scene</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background: #10141a;
+            /* solid dark fallback */
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        #labels-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .label {
+            position: absolute;
+            background: rgba(18, 24, 38, 0.85);
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+            transition: color 0.3s, background-color 0.3s, border-color 0.3s, text-shadow 0.3s, transform 0.3s, opacity 0.3s, box-shadow 0.3s;
+            transform: translate(-50%, -50%);
+            transform-origin: center center;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .label.active {
+            color: #fff;
+            border-color: rgba(0, 240, 255, 0.8);
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
+            background: rgba(0, 150, 255, 0.15);
+            transform: translate(-50%, -50%) scale(1.15);
+            opacity: 1;
+            box-shadow: 0 4px 25px rgba(0, 240, 255, 0.4);
+            z-index: 10;
+        }
+    </style>
+    <!-- Use Import Map to load Three.js addons properly -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="canvas-container"></div>
+    <div id="labels-container">
+        <div class="label" id="lbl-call">Call</div>
+        <div class="label" id="lbl-wa">WhatsApp</div>
+        <div class="label" id="lbl-msngr">Messenger</div>
+        <div class="label" id="lbl-ack">Acknowledgement</div>
+        <div class="label" id="lbl-cal">Calendar</div>
+        <div class="label" id="lbl-sale">Appointment/Booking</div>
+    </div>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+        import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+        import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+        import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+        import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+        // --- 1. Scene Setup ---
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x10141a);
+
+        // Responsive camera
+        const aspect = window.innerWidth / window.innerHeight;
+        const frustumSize = 250;
+        const camera = new THREE.OrthographicCamera(
+            frustumSize * aspect / -2, frustumSize * aspect / 2,
+            frustumSize / 2, frustumSize / -2,
+            -1000, 2000
+        );
+        camera.position.set(200, 200, 200); // Isometric perspective
+        camera.lookAt(0, 0, 0);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.VSMShadowMap;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.0;
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Post-Processing (Bloom for glowing edges/neon)
+        const renderScene = new RenderPass(scene, camera);
+        const composer = new EffectComposer(renderer);
+        composer.addPass(renderScene);
+
+        const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.4, 0.4, 0.85); // lowered again
+        bloomPass.threshold = 1.0;
+        bloomPass.strength = 0.8;
+        bloomPass.radius = 0.5;
+        composer.addPass(bloomPass);
+
+        // --- 2. Lighting & Environment ---
+        const environment = new RoomEnvironment();
+        const pmremGenerator = new THREE.PMREMGenerator(renderer);
+        scene.environment = pmremGenerator.fromScene(environment).texture;
+        environment.dispose();
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.6); // lowered further
+        dirLight.position.set(100, 200, 100);
+        dirLight.castShadow = true;
+        dirLight.shadow.mapSize.width = 1024;
+        dirLight.shadow.mapSize.height = 1024;
+        dirLight.shadow.camera.left = -200;
+        dirLight.shadow.camera.right = 200;
+        dirLight.shadow.camera.top = 200;
+        dirLight.shadow.camera.bottom = -200;
+        dirLight.shadow.bias = -0.001;
+        scene.add(dirLight);
+
+        // Soft blue fill light
+        const fillLight = new THREE.DirectionalLight(0x00f0ff, 0.8);
+        fillLight.position.set(-100, 50, -100);
+        scene.add(fillLight);
+
+        // --- 3. Materials ---
+        const premiumGlass = new THREE.MeshPhysicalMaterial({
+            color: 0x1a2135,
+            metalness: 0.1,
+            roughness: 0.2,
+            transmission: 0.9,
+            thickness: 5.0,
+            ior: 1.5,
+            transparent: true,
+            opacity: 1.0,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.1
+        });
+
+        const darkMat = new THREE.MeshStandardMaterial({
+            color: 0x121721,
+            roughness: 0.4,
+            metalness: 0.3
+        });
+
+        const darkBodyMat = new THREE.MeshStandardMaterial({
+            color: 0x1f2740,
+            roughness: 0.3,
+            metalness: 0.2,
+            clearcoat: 0.5,
+            clearcoatRoughness: 0.2
+        });
+
+        const glowingCyan = new THREE.MeshStandardMaterial({
+            color: 0x00f0ff,
+            emissive: 0x00f0ff,
+            emissiveIntensity: 1.5, // > 1 blooms
+            roughness: 0.2,
+            metalness: 0.8
+        });
+
+        const glowingWhite = new THREE.MeshStandardMaterial({
+            color: 0xffffff,
+            emissive: 0xffffff,
+            emissiveIntensity: 1.2,
+            roughness: 0.1,
+            metalness: 0.4
+        });
+
+        // Create simple helper to group geometries perfectly
+        const nodes = [];
+
+        function addNode(id, x, y, z, setupBlock) {
+            const group = new THREE.Group();
+            group.position.set(x, y, z);
+
+            // Allow block to configure geometries
+            const pulseTargets = setupBlock(group);
+
+            scene.add(group);
+            nodes.push({ id, mesh: group, pulseTargets: pulseTargets || [], basePos: new THREE.Vector3(x, y, z) });
+        }
+
+        // --- 4. Node Constructors ---
+
+        // 1. Phone (Call)
+        addNode('call', -40, -5, 60, (g) => {
+            const base = new THREE.Mesh(new RoundedBoxGeometry(22, 3, 28, 4, 1.5), premiumGlass);
+            base.receiveShadow = true;
+            g.add(base);
+
+            // Phone receiver icon (C-shape using bent cylinder or torus)
+            const telGroup = new THREE.Group();
+
+            const dimCyan = glowingCyan.clone();
+            dimCyan.emissiveIntensity = 0.5; // much dimmer base
+
+            // Handle (arc)
+            const telGeo = new THREE.TorusGeometry(5, 1.8, 16, 32, Math.PI * 0.9);
+            const handle = new THREE.Mesh(telGeo, dimCyan);
+            handle.rotation.x = Math.PI / 2;
+            handle.rotation.z = Math.PI * 0.05; // Center it
+
+            // Ear/Mouth pieces (Capsules or Spheres)
+            const pe1 = new THREE.Mesh(new THREE.CapsuleGeometry(2.5, 2, 16, 16), dimCyan);
+            pe1.rotation.y = Math.PI / 2;
+            pe1.position.set(-4.8, 0, 1.5);
+
+            const pe2 = new THREE.Mesh(new THREE.CapsuleGeometry(2.5, 2, 16, 16), dimCyan);
+            pe2.rotation.y = Math.PI / 2;
+            pe2.position.set(4.8, 0, 1.5);
+
+            telGroup.add(handle, pe1, pe2);
+            telGroup.position.y = 4;
+            telGroup.rotation.y = Math.PI / 4;
+            g.add(telGroup);
+
+            // Return things that should pulse
+            return [dimCyan];
+        });
+
+        // 2. WhatsApp (True SVG-style 3D Logo)
+        addNode('wa', 20, -5, 60, (g) => {
+            const base = new THREE.Mesh(new RoundedBoxGeometry(32, 3, 24, 4, 1.5), premiumGlass);
+            base.receiveShadow = true;
+            g.add(base);
+
+            const waGreen = new THREE.MeshStandardMaterial({
+                color: 0x25D366, emissive: 0x25D366, emissiveIntensity: 0.5,
+                roughness: 0.2, metalness: 0.5
+            });
+
+            // True WhatsApp Bubble Shape
+            const waShape = new THREE.Shape();
+            waShape.absarc(0, 0, 8, 0, Math.PI * 2, false);
+            // Append the tail vector physically onto the circle outline
+            const waExtrudeOpt = { depth: 0.5, bevelEnabled: true, bevelSize: 0.1, bevelThickness: 0.1, curveSegments: 32 };
+
+            const b1Grp = new THREE.Group();
+
+            // Base bubble
+            const bubbleBody = new THREE.Mesh(new THREE.ExtrudeGeometry(waShape, waExtrudeOpt), waGreen);
+            bubbleBody.geometry.center();
+
+            // Tail
+            const tail1 = new THREE.Mesh(new THREE.ConeGeometry(2.5, 5, 32), waGreen);
+            tail1.position.set(-6, -6, 0);
+            tail1.rotation.z = -Math.PI * 0.8; // Point outward radially
+
+            b1Grp.add(bubbleBody, tail1);
+
+            // True Phone Cutout Inside Bubble
+            const phoneShape = new THREE.Shape();
+            // Complex polygon tracking roughly the WhatsApp handset shape
+            phoneShape.moveTo(-2, 3);
+            phoneShape.quadraticCurveTo(-3, 3, -3, 2);
+            phoneShape.lineTo(-3, 0);
+            phoneShape.quadraticCurveTo(-3, -2, -1, -3);
+            phoneShape.lineTo(2, -3);
+            phoneShape.quadraticCurveTo(3, -3, 3, -2);
+            phoneShape.lineTo(3, -1);
+            phoneShape.quadraticCurveTo(3, 0, 2, 0);
+            phoneShape.lineTo(1, 0);
+            phoneShape.quadraticCurveTo(0, 1, 0, 2);
+            phoneShape.lineTo(1, 2);
+            phoneShape.quadraticCurveTo(2, 3, 1, 3);
+            phoneShape.lineTo(-2, 3);
+
+            const waPhone = new THREE.Mesh(new THREE.ShapeGeometry(phoneShape), glowingWhite);
+            waPhone.geometry.center();
+            waPhone.rotation.z = Math.PI / 4; // tilt like WA logo
+            waPhone.position.z = 0.26; // sit perfectly flush on surface
+            b1Grp.add(waPhone);
+
+            b1Grp.rotation.x = -Math.PI / 2; // Flat on table!
+            b1Grp.position.set(0, 3, 0);
+            b1Grp.castShadow = true;
+            g.add(b1Grp);
+
+            // Return things that should pulse
+            return [waGreen, glowingWhite];
+        });
+
+        // 3. Messenger (True SVG-style 3D Logo)
+        addNode('msngr', 70, -5, 10, (g) => {
+            const base = new THREE.Mesh(new RoundedBoxGeometry(24, 3, 24, 4, 1.5), premiumGlass);
+            base.receiveShadow = true;
+            g.add(base);
+
+            const msgBlue = new THREE.MeshStandardMaterial({
+                color: 0x0084FF, emissive: 0x0084FF, emissiveIntensity: 0.6,
+                roughness: 0.1, metalness: 0.4
+            });
+
+            const b3Grp = new THREE.Group();
+
+            const msgShape = new THREE.Shape();
+            msgShape.absarc(0, 0, 8, 0, Math.PI * 2, false);
+
+            const msgExtrudeOpt = { depth: 0.5, bevelEnabled: true, bevelSize: 0.1, bevelThickness: 0.1, curveSegments: 32 };
+            const bubbleBody = new THREE.Mesh(new THREE.ExtrudeGeometry(msgShape, msgExtrudeOpt), msgBlue);
+            bubbleBody.geometry.center();
+
+            const tail3 = new THREE.Mesh(new THREE.ConeGeometry(2.5, 5, 32), msgBlue);
+            tail3.position.set(-5, -6.5, 0); // Tail points bottom-left
+            tail3.rotation.z = -Math.PI * 0.8;
+
+            b3Grp.add(bubbleBody, tail3);
+
+            // Inset lightning bolt (white)
+            const boltS = new THREE.Shape();
+            boltS.moveTo(-1, 3);
+            boltS.lineTo(-4, -1);
+            boltS.lineTo(-1, -1);
+            boltS.lineTo(-1, -4);
+            boltS.lineTo(4, 1);
+            boltS.lineTo(1, 1);
+            boltS.lineTo(1, 3);
+
+            const bolt = new THREE.Mesh(new THREE.ShapeGeometry(boltS), glowingWhite);
+            bolt.geometry.center();
+            bolt.position.z = 0.26; // perfectly flush
+            b3Grp.add(bolt);
+
+            b3Grp.rotation.x = -Math.PI / 2; // Flat on table!
+            b3Grp.position.set(0, 3, 0);
+            b3Grp.castShadow = true;
+            g.add(b3Grp);
+
+            return [msgBlue, glowingWhite];
+        });
+
+        // 4. Acknowledgement (Progress Panel)
+        addNode('ack', -60, 5, -30, (g) => {
+
+            // Text Canvas
+            const makePanelTex = () => {
+                const cvs = document.createElement('canvas');
+                cvs.width = 512; cvs.height = 256;
+                const ctx = cvs.getContext('2d');
+                ctx.fillStyle = '#000000'; // Pure black for maximum contrast
+                ctx.fillRect(0, 0, 512, 256);
+
+                ctx.fillStyle = '#7a8894'; // Much dimmer text over dark background
+                ctx.font = '600 24px Inter, sans-serif'; // Reduced thickness and size
+                // Move text Y safely ABOVE the physical tracks
+                ctx.fillText('Progress tracking', 60, 60);
+                ctx.fillText('Communication', 60, 150);
+
+                ctx.textAlign = 'right';
+                ctx.font = '600 28px Inter, sans-serif'; // Reduced size for percentages
+                ctx.fillStyle = '#00c0cc'; // Slightly dimmer cyan
+                ctx.fillText('95%', 450, 60);
+                ctx.fillText('10%', 450, 150);
+
+                return new THREE.CanvasTexture(cvs);
+            };
+
+            const panelMat = new THREE.MeshStandardMaterial({
+                color: 0xffffff, roughness: 0.4, metalness: 0.3,
+                map: makePanelTex()
+            });
+
+            const body = new THREE.Mesh(new RoundedBoxGeometry(65, 4, 35, 4, 2), panelMat);
+            body.receiveShadow = true;
+            g.add(body);
+
+            // Progress tracks (dark indent)
+            const trackMat = new THREE.MeshStandardMaterial({ color: 0x0a0d14, roughness: 0.8 });
+            const t1 = new THREE.Mesh(new RoundedBoxGeometry(45, 1.5, 3, 2, 0.5), trackMat);
+            t1.position.set(0, 2.5, -6);
+            const t2 = new THREE.Mesh(new RoundedBoxGeometry(45, 1.5, 3, 2, 0.5), trackMat);
+            t2.position.set(0, 2.5, 6);
+            g.add(t1, t2);
+
+            // Glowing fills
+            const f1 = new THREE.Mesh(new RoundedBoxGeometry(30, 1.6, 2.6, 2, 0.5), glowingCyan);
+            f1.position.set(-7.5, 2.5, -6);
+            const f2 = new THREE.Mesh(new RoundedBoxGeometry(15, 1.6, 2.6, 2, 0.5), glowingCyan);
+            f2.position.set(-15, 2.5, 6);
+            g.add(f1, f2);
+
+            return [f1.material, f2.material];
+        });
+
+        // 5. Calendar
+        addNode('cal', 0, 5, -10, (g) => {
+            // Main block (purple/blue dark tone)
+            const calBody = new THREE.Mesh(new RoundedBoxGeometry(26, 22, 26, 4, 3), darkBodyMat);
+            calBody.receiveShadow = true;
+            calBody.castShadow = true;
+            g.add(calBody);
+
+            // Header (bright cyan/blue)
+            const headerMat = glowingCyan.clone();
+            headerMat.color.setHex(0x5588ff);
+            headerMat.emissive.setHex(0x2244aa);
+            const header = new THREE.Mesh(new RoundedBoxGeometry(26.2, 5, 26.2, 4, 1.5), headerMat);
+            header.position.y = 9;
+            g.add(header);
+
+            // Silver Rings
+            const ringMat = new THREE.MeshStandardMaterial({ color: 0xe0e0e0, metalness: 0.9, roughness: 0.1 });
+            const r1 = new THREE.Mesh(new THREE.TorusGeometry(2, 0.6, 16, 32), ringMat);
+            r1.rotation.y = Math.PI / 2;
+            r1.position.set(-7, 12, -7);
+            const r2 = new THREE.Mesh(new THREE.TorusGeometry(2, 0.6, 16, 32), ringMat);
+            r2.rotation.y = Math.PI / 2;
+            r2.position.set(-7, 12, 7);
+            g.add(r1, r2);
+
+            // Calendar Grid UI (+X and +Z faces) using CanvasTexture
+            const makeGridTex = () => {
+                const cvs = document.createElement('canvas');
+                cvs.width = 512; cvs.height = 512;
+                const ctx = cvs.getContext('2d');
+
+                // Base
+                ctx.fillStyle = '#1f2740';
+                ctx.fillRect(0, 0, 512, 512);
+
+                // Title
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '600 48px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('CALENDAR', 256, 80);
+
+                // Grid
+                ctx.font = '500 36px Inter, sans-serif';
+                ctx.textBaseline = 'middle';
+                const rows = 4, cols = 5;
+                const cellW = 80, cellH = 80;
+                const startX = (512 - (cols * cellW)) / 2 + (cellW / 2);
+                const startY = 160;
+
+                let d = 1;
+                for (let r = 0; r < rows; r++) {
+                    for (let c = 0; c < cols; c++) {
+                        if (d > 20) break;
+                        const x = startX + c * cellW;
+                        const y = startY + r * cellH;
+
+                        if (d === 8) {
+                            ctx.fillStyle = '#00f0ff';
+                            ctx.beginPath();
+                            ctx.roundRect(x - 32, y - 32, 64, 64, 16);
+                            ctx.fill();
+                            ctx.fillStyle = '#10141a'; // dark text for active block
+                        } else {
+                            ctx.fillStyle = '#8899aa';
+                        }
+                        ctx.fillText(d.toString(), x, y + 2);
+                        d++;
+                    }
+                }
+                const tex = new THREE.CanvasTexture(cvs);
+                tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+                return tex;
+            };
+
+            const gridMat = new THREE.MeshBasicMaterial({ map: makeGridTex() });
+
+            // X Face
+            const faceX = new THREE.Mesh(new THREE.PlaneGeometry(24, 24), gridMat);
+            faceX.position.set(13.05, 0, 0);
+            faceX.rotation.y = Math.PI / 2;
+            g.add(faceX);
+
+            // Z Face
+            const faceZ = new THREE.Mesh(new THREE.PlaneGeometry(24, 24), gridMat);
+            faceZ.position.set(0, 0, 13.05);
+            g.add(faceZ);
+
+            return [headerMat];
+        });
+
+        // 6. Appointment/Booking (Dollar block)
+        addNode('sale', 60, 15, -45, (g) => {
+            const base = new THREE.Mesh(new RoundedBoxGeometry(24, 4, 24, 4, 1.5), premiumGlass);
+            base.receiveShadow = true;
+            g.add(base);
+
+            // Icon Texture (Dollar Sign)
+            const makeDollarTex = () => {
+                const cvs = document.createElement('canvas');
+                cvs.width = 256; cvs.height = 256;
+                const ctx = cvs.getContext('2d');
+                ctx.fillStyle = '#00ffaa';
+                ctx.fillRect(0, 0, 256, 256);
+
+                ctx.fillStyle = '#10141a';
+                ctx.font = 'bold 160px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('$', 128, 148);  // Centered slightly down 
+                return new THREE.CanvasTexture(cvs);
+            };
+
+            const dollarMat = new THREE.MeshStandardMaterial({
+                color: 0x00ffaa, emissive: 0x00ffaa, emissiveIntensity: 0.8,
+                roughness: 0.2, metalness: 0.8, map: makeDollarTex()
+            });
+
+            // Round sphere/disc
+            const discGeo = new THREE.CylinderGeometry(8, 8, 4, 32);
+            const disc = new THREE.Mesh(discGeo, dollarMat);
+            disc.position.y = 4.5;
+            disc.castShadow = true;
+            g.add(disc);
+
+            return [dollarMat];
+        });
+
+        // --- 5. Flow Connectors ---
+        const pathMat = new THREE.MeshStandardMaterial({
+            color: 0x00f0ff,
+            emissive: 0x00f0ff,
+            emissiveIntensity: 0.4,
+            transparent: true,
+            opacity: 0.3,
+            depthWrite: false
+        });
+
+        const curves = [];
+        function createPath(points) {
+            const curve = new THREE.CatmullRomCurve3(points);
+            const geo = new THREE.TubeGeometry(curve, 64, 0.5, 8, false);
+            const mesh = new THREE.Mesh(geo, pathMat);
+            scene.add(mesh);
+            return curve;
+        }
+
+        const c1 = createPath([new THREE.Vector3(-40, -5, 60), new THREE.Vector3(-40, -5, 20), new THREE.Vector3(-20, 5, -10), new THREE.Vector3(0, 5, -10)]);
+        const c2 = createPath([new THREE.Vector3(20, -5, 60), new THREE.Vector3(10, -5, 25), new THREE.Vector3(0, 5, -10)]);
+        const c3 = createPath([new THREE.Vector3(70, -5, 10), new THREE.Vector3(40, -5, -10), new THREE.Vector3(20, 5, -10), new THREE.Vector3(0, 5, -10)]);
+        const c4 = createPath([new THREE.Vector3(0, 5, -10), new THREE.Vector3(-30, 5, -20), new THREE.Vector3(-55, 5, -25)]);
+        const c5 = createPath([new THREE.Vector3(0, 5, -10), new THREE.Vector3(30, 5, -20), new THREE.Vector3(60, 15, -45)]);
+
+        const orbs = [];
+        const orbGeo = new THREE.SphereGeometry(2.0, 16, 16);
+        const orbMatWhite = glowingWhite.clone();
+        orbMatWhite.emissiveIntensity = 8.0; // intense glow traveler
+
+        for (let i = 0; i < 5; i++) {
+            const orb = new THREE.Mesh(orbGeo, orbMatWhite);
+            orb.visible = false;
+            scene.add(orb);
+            orbs.push(orb);
+        }
+
+        // --- 6. Animation Logic ---
+        const clock = new THREE.Clock();
+        const duration = 7.0;
+
+        function getIntensity(id, t) {
+            if (id === 'call' || id === 'wa' || id === 'msngr') {
+                if (t >= 0.0 && t < 0.1) return Math.sin((t / 0.1) * Math.PI);
+            }
+            if (id === 'cal') {
+                if (t >= 0.10 && t < 0.20) return Math.sin(((t - 0.10) / 0.1) * Math.PI);
+                if (t >= 0.40 && t < 0.50) return Math.sin(((t - 0.40) / 0.1) * Math.PI);
+            }
+            if (id === 'ack') {
+                if (t >= 0.25 && t < 0.35) return Math.sin(((t - 0.25) / 0.1) * Math.PI);
+            }
+            if (id === 'sale') {
+                if (t >= 0.55 && t < 0.65) return Math.sin(((t - 0.55) / 0.1) * Math.PI);
+            }
+            return 0;
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const elapsed = clock.getElapsedTime();
+            const t = (elapsed % duration) / duration;
+
+            // Micro-float
+            nodes.forEach(n => {
+                n.mesh.position.y = n.basePos.y + Math.sin(elapsed * 2.0 + n.basePos.x) * 1.5;
+            });
+
+            // Route labels properly (screen coordinates)
+            const vector = new THREE.Vector3();
+            nodes.forEach(node => {
+                vector.copy(node.mesh.position);
+                // add height exactly matching the object dimensions visually
+                let yOffset = 18; // base
+                if (node.id === 'cal') yOffset = 24;
+                if (node.id === 'ack') yOffset = 30; // Raised much higher
+                if (node.id === 'wa') yOffset = 20;
+                if (node.id === 'msngr') yOffset = 20;
+                if (node.id === 'sale') yOffset = 20;
+                vector.y += yOffset;
+                vector.project(camera);
+
+                // correctly map to DOM regardless of window size
+                const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
+                const y = (-(vector.y) * 0.5 + 0.5) * window.innerHeight;
+
+                const el = document.getElementById('lbl-' + node.id);
+                if (el) {
+                    el.style.left = `${x}px`;
+                    el.style.top = `${y}px`;
+
+                    const active = getIntensity(node.id, t) > 0.05;
+                    if (active) el.classList.add('active');
+                    else el.classList.remove('active');
+                }
+            });
+
+            // Flow travelers
+            orbs.forEach(o => o.visible = false);
+            if (t >= 0.0 && t < 0.15) {
+                let u = THREE.MathUtils.smoothstep(t / 0.15, 0, 1);
+                orbs[0].visible = true; orbs[0].position.copy(c1.getPoint(u));
+                orbs[1].visible = true; orbs[1].position.copy(c2.getPoint(u));
+                orbs[2].visible = true; orbs[2].position.copy(c3.getPoint(u));
+            }
+            if (t >= 0.15 && t < 0.30) {
+                let u = THREE.MathUtils.smoothstep((t - 0.15) / 0.15, 0, 1);
+                orbs[3].visible = true; orbs[3].position.copy(c4.getPoint(u));
+            }
+            if (t >= 0.30 && t < 0.45) {
+                let u = THREE.MathUtils.smoothstep((t - 0.30) / 0.15, 0, 1);
+                orbs[3].visible = true; orbs[3].position.copy(c4.getPoint(1 - u)); // returns
+            }
+            if (t >= 0.45 && t < 0.60) {
+                let u = THREE.MathUtils.smoothstep((t - 0.45) / 0.15, 0, 1);
+                orbs[4].visible = true; orbs[4].position.copy(c5.getPoint(u));
+            }
+
+            // Sync pulse logic materials
+            nodes.forEach(node => {
+                const intensity = getIntensity(node.id, t);
+                // base emissive + jump
+                node.pulseTargets.forEach(mat => {
+                    const baseEv = mat === glowingCyan ? 1.5 : (mat === glowingWhite ? 1.2 : 0);
+                    mat.emissiveIntensity = baseEv + intensity * 4.0;
+                });
+                // Micro jump scale when glowing
+                node.mesh.scale.setScalar(1.0 + intensity * 0.03);
+            });
+
+            composer.render();
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            const aspect = window.innerWidth / window.innerHeight;
+            camera.left = -frustumSize * aspect / 2;
+            camera.right = frustumSize * aspect / 2;
+            camera.top = frustumSize / 2;
+            camera.bottom = -frustumSize / 2;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            composer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+
+</html>

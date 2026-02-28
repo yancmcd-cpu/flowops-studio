@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import SalesCopy from './components/SalesCopy';
 import Positioning from './components/Positioning';
+import Testimonial from './components/Testimonial';
 import UseCases from './components/UseCases';
 import ClosingSection from './components/ClosingSection';
 import Footer from './components/Footer';
@@ -15,8 +16,9 @@ function App() {
       <main>
         <Hero />
         <SalesCopy />
-        <Positioning />
         <UseCases />
+        <Positioning />
+        <Testimonial />
         <ClosingSection />
       </main>
       <Footer />

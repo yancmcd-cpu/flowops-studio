@@ -118,5 +118,14 @@
 
     .system-frame-wrap {
         border-radius: 14px;
+        padding-bottom: 75%;
+        /* 4:3 on mobile — much taller, nodes have room */
+    }
+}
+
+@media (max-width: 480px) {
+    .system-frame-wrap {
+        padding-bottom: 90%;
+        /* nearly square on small phones */
     }
 }

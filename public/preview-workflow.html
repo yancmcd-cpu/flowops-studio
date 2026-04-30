@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Section Preview — Lead Workflow</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    body { background: #05070D; }
+    .section-kicker {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(72, 199, 194, 0.84);
+    }
+    .fade-up { animation: fadeUp 0.55s ease both; }
+    .d1{animation-delay:.05s}.d2{animation-delay:.15s}.d3{animation-delay:.25s}.d4{animation-delay:.35s}.d5{animation-delay:.45s}.d6{animation-delay:.55s}
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+    /* Pulse on channel icons */
+    .ch-icon { transition: all 0.2s ease; }
+    .ch-icon:hover { transform: scale(1.08); border-color: rgba(59,130,246,0.5); }
+
+    /* Animated flowing line */
+    @keyframes flow {
+      0%   { stroke-dashoffset: 200; opacity: 0.3; }
+      50%  { opacity: 0.8; }
+      100% { stroke-dashoffset: 0;   opacity: 0.3; }
+    }
+    .flow-line { stroke-dasharray: 6 4; animation: flow 2.5s linear infinite; }
+
+    /* Pipeline step hover */
+    .pipe-step:hover { border-color: rgba(59,130,246,0.45); box-shadow: 0 6px 30px -8px rgba(59,130,246,0.2); }
+    .pipe-step { transition: all 0.2s ease; }
+  </style>
+</head>
+<body class="font-sans antialiased text-white">
+
+<section class="bg-[#05070D] py-16 sm:py-24 px-4 sm:px-8 lg:px-12 border-b border-white/5">
+  <div class="max-w-7xl mx-auto">
+
+    <!-- Heading -->
+    <div class="text-center mb-12 sm:mb-16 fade-up d1">
+      <div class="section-kicker mb-5">
+        Lead Pipeline
+      </div>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight px-2">
+        Every Channel. Every Lead.
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400"> Zero Missed.</span>
+      </h2>
+      <p class="mt-5 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto px-2">
+        FlowOps captures leads from every platform and runs them through an automated pipeline — from first contact to booked revenue.
+      </p>
+    </div>
+
+    <!-- INTAKE CHANNELS -->
+    <div class="mb-8 sm:mb-10 fade-up d2">
+      <p class="text-center text-xs font-bold uppercase tracking-[0.25em] text-slate-500 mb-6">Lead Sources</p>
+      <div class="flex flex-wrap justify-center gap-3 sm:gap-4">
+
+        <!-- WhatsApp -->
+        <div class="ch-icon flex items-center gap-2.5 px-4 py-3 rounded-xl border border-white/8 cursor-default"
+          style="background: rgba(8,17,31,0.7); backdrop-filter: blur(8px);">
+          <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.122 1.535 5.853L.057 23.457a.75.75 0 00.914.914l5.604-1.478A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.726 9.726 0 01-4.97-1.361l-.356-.213-3.684.97.987-3.607-.234-.372A9.718 9.718 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+          <span class="text-sm font-semibold text-slate-300">WhatsApp</span>
+        </div>
+
+        <!-- Facebook Messenger -->
+        <div class="ch-icon flex items-center gap-2.5 px-4 py-3 rounded-xl border border-white/8 cursor-default"
+          style="background: rgba(8,17,31,0.7); backdrop-filter: blur(8px);">
+          <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="#0084FF"><path d="M12 0C5.373 0 0 5.149 0 11.499c0 3.619 1.808 6.845 4.637 8.952V24l4.236-2.328C10.076 21.888 11.023 22 12 22c6.627 0 12-4.925 12-11.5C24 5.148 18.627 0 12 0zm1.194 15.529l-3.054-3.27-5.963 3.27 6.554-6.961 3.128 3.27 5.889-3.27-6.554 6.961z"/></svg>
+          <span class="text-sm font-semibold text-slate-300">Messenger</span>
+        </div>
+
+        <!-- Web Chat -->
+        <div class="ch-icon flex items-center gap-2.5 px-4 py-3 rounded-xl border border-white/8 cursor-default"
+          style="background: rgba(8,17,31,0.7); backdrop-filter: blur(8px);">
+          <svg class="w-5 h-5 text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+          </svg>
+          <span class="text-sm font-semibold text-slate-300">Web Chat</span>
+        </div>
+
+        <!-- Phone Call -->
+        <div class="ch-icon flex items-center gap-2.5 px-4 py-3 rounded-xl border border-white/8 cursor-default"
+          style="background: rgba(8,17,31,0.7); backdrop-filter: blur(8px);">
+          <svg class="w-5 h-5 text-cyan-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+          </svg>
+          <span class="text-sm font-semibold text-slate-300">Phone / Call</span>
+        </div>
+
+        <!-- SMS -->
+        <div class="ch-icon flex items-center gap-2.5 px-4 py-3 rounded-xl border border-white/8 cursor-default"
+          style="background: rgba(8,17,31,0.7); backdrop-filter: blur(8px);">
+          <svg class="w-5 h-5 text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/>
+          </svg>
+          <span class="text-sm font-semibold text-slate-300">SMS / Text</span>
+        </div>
+
+        <!-- Email -->
+        <div class="ch-icon flex items-center gap-2.5 px-4 py-3 rounded-xl border border-white/8 cursor-default"
+          style="background: rgba(8,17,31,0.7); backdrop-filter: blur(8px);">
+          <svg class="w-5 h-5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          <span class="text-sm font-semibold text-slate-300">Email</span>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="ch-icon flex items-center gap-2.5 px-4 py-3 rounded-xl border border-white/8 cursor-default"
+          style="background: rgba(8,17,31,0.7); backdrop-filter: blur(8px);">
+          <svg class="w-5 h-5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+          <span class="text-sm font-semibold text-slate-300">Web Form</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Funnel Arrow (desktop) -->
+    <div class="hidden sm:flex justify-center mb-6 fade-up d3">
+      <div class="flex flex-col items-center gap-1">
+        <svg width="2" height="32"><line x1="1" y1="0" x2="1" y2="32" class="flow-line" stroke="rgba(59,130,246,0.5)" stroke-width="2"/></svg>
+        <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+      </div>
+    </div>
+
+    <!-- AI PIPELINE STEPS -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 fade-up d3">
+
+      <!-- Step 1: Instant Response -->
+      <div class="pipe-step rounded-2xl border border-white/5 p-5 sm:p-6 relative overflow-hidden cursor-default text-center sm:text-left"
+        style="background: rgba(8,17,31,0.7); backdrop-filter: blur(10px);">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-blue-600/8 rounded-full blur-2xl"></div>
+        <div class="flex items-center justify-center gap-3 mb-4 relative z-10 sm:justify-start">
+          <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+            style="background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.25);">
+            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <div class="w-6 h-6 rounded-full bg-blue-600/30 border border-blue-500/30 flex items-center justify-center text-[10px] font-black text-blue-300">1</div>
+        </div>
+        <h4 class="text-sm sm:text-base font-bold text-white mb-2 relative z-10">Instant Response</h4>
+        <p class="text-xs text-slate-400 leading-relaxed relative z-10">AI responds within 60 seconds on the same channel the lead used — personalised, professional.</p>
+        <div class="mt-3 text-xs font-bold text-blue-400 relative z-10">&lt; 60 seconds</div>
+      </div>
+
+      <!-- Step 2: Qualify -->
+      <div class="pipe-step rounded-2xl border border-white/5 p-5 sm:p-6 relative overflow-hidden cursor-default text-center sm:text-left"
+        style="background: rgba(8,17,31,0.7); backdrop-filter: blur(10px);">
+        <div class="flex items-center justify-center gap-3 mb-4 sm:justify-start">
+          <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+            style="background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.25);">
+            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+            </svg>
+          </div>
+          <div class="w-6 h-6 rounded-full bg-blue-600/30 border border-blue-500/30 flex items-center justify-center text-[10px] font-black text-blue-300">2</div>
+        </div>
+        <h4 class="text-sm sm:text-base font-bold text-white mb-2">Qualify the Lead</h4>
+        <p class="text-xs text-slate-400 leading-relaxed">Asks tailored questions to score intent, budget, and urgency. Hot leads surface immediately.</p>
+        <div class="mt-3 text-xs font-bold text-blue-400">Auto-scored</div>
+      </div>
+
+      <!-- Step 3: Nurture & Follow-up -->
+      <div class="pipe-step rounded-2xl border border-white/5 p-5 sm:p-6 relative overflow-hidden cursor-default text-center sm:text-left"
+        style="background: rgba(8,17,31,0.7); backdrop-filter: blur(10px);">
+        <div class="flex items-center justify-center gap-3 mb-4 sm:justify-start">
+          <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+            style="background: rgba(6,182,212,0.15); border: 1px solid rgba(6,182,212,0.25);">
+            <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+          </div>
+          <div class="w-6 h-6 rounded-full bg-cyan-600/30 border border-cyan-500/30 flex items-center justify-center text-[10px] font-black text-cyan-300">3</div>
+        </div>
+        <h4 class="text-sm sm:text-base font-bold text-white mb-2">Nurture &amp; Follow Up</h4>
+        <p class="text-xs text-slate-400 leading-relaxed">7-touch automated sequence keeps warm leads engaged until they're ready to commit — no manual chasing.</p>
+        <div class="mt-3 text-xs font-bold text-cyan-400">7-touch sequence</div>
+      </div>
+
+      <!-- Step 4: Revenue — no arrow after last step -->
+      <div class="pipe-step rounded-2xl border border-cyan-500/25 p-5 sm:p-6 relative overflow-hidden cursor-default text-center sm:text-left"
+        style="background: rgba(8,17,31,0.8); backdrop-filter: blur(10px); box-shadow: 0 0 40px -12px rgba(6,182,212,0.2);">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/8 rounded-full blur-2xl"></div>
+        <div class="flex items-center justify-center gap-3 mb-4 relative z-10 sm:justify-start">
+          <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+            style="background: rgba(6,182,212,0.2); border: 1px solid rgba(6,182,212,0.35);">
+            <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div class="w-6 h-6 rounded-full bg-cyan-500/40 border border-cyan-400/40 flex items-center justify-center text-[10px] font-black text-white">4</div>
+        </div>
+        <h4 class="text-sm sm:text-base font-bold text-white mb-2 relative z-10">Booked. Closed. Revenue.</h4>
+        <p class="text-xs text-slate-400 leading-relaxed relative z-10">Lead books directly into your calendar. You show up, deliver, close. AI starts again for the next lead.</p>
+        <div class="mt-3 flex items-center justify-center gap-1.5 relative z-10 sm:justify-start">
+          <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+          <span class="text-xs font-bold text-cyan-400">Revenue captured</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom note -->
+    <p class="text-center text-xs text-slate-600 mt-10 sm:mt-14 px-4 fade-up d5">
+      The entire pipeline runs autonomously — 24/7, across every channel, for every lead.
+    </p>
+
+  </div>
+</section>
+
+<!-- Preview nav -->
+<div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3
+  bg-[#08111F]/90 backdrop-blur-md border border-white/10 rounded-xl sm:rounded-2xl shadow-2xl
+  text-xs font-bold text-slate-400 uppercase tracking-widest">
+  <span class="text-cyan-400">●</span>
+  <span class="hidden sm:inline">Lead Workflow</span>
+  <span class="sm:hidden">Workflow</span>
+  <span class="text-white/20">|</span>
+  <a href="/preview-revenue-impact.html" class="text-blue-400 hover:text-blue-300 transition-colors">← Revenue</a>
+  <span class="text-white/20">|</span>
+  <a href="/preview-results.html" class="text-blue-400 hover:text-blue-300 transition-colors">Results →</a>
+</div>
+
+</body>
+</html>

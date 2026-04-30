@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Section Preview - Mid-Page CTA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    body { background: #05070D; }
+    .fade-up { animation: fadeUp 0.55s ease both; }
+    .d1{animation-delay:.05s}.d2{animation-delay:.18s}
+    @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    .section-kicker {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(72, 199, 194, 0.84);
+    }
+    .cta-strip {
+      background: linear-gradient(135deg, rgba(8,17,31,0.84) 0%, rgba(14,28,51,0.92) 100%);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(59,130,246,0.15);
+      border-bottom: 1px solid rgba(59,130,246,0.15);
+    }
+    .btn-primary {
+      background:
+        linear-gradient(180deg, rgba(54,123,255,0.92) 0%, rgba(29,103,238,0.88) 54%, rgba(17,82,208,0.84) 100%),
+        linear-gradient(180deg, rgba(122,215,255,0.16) 0%, rgba(72,199,194,0.08) 100%);
+      border: 1px solid rgba(118,199,255,0.42);
+      color: #f8fbff;
+      box-shadow:
+        0 16px 32px rgba(0,0,0,0.24),
+        0 0 0 1px rgba(255,255,255,0.12) inset,
+        0 0 24px rgba(72,199,194,0.12);
+      transition: all 0.2s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 20px 38px rgba(0,0,0,0.26),
+        0 0 0 1px rgba(255,255,255,0.58) inset,
+        0 0 28px rgba(130,164,255,0.24);
+      color: #2d3547;
+      border-color: rgba(235,243,255,0.92);
+      background:
+        linear-gradient(180deg, rgba(247,250,255,1) 0%, rgba(229,239,255,0.96) 58%, rgba(210,226,255,0.94) 100%),
+        linear-gradient(180deg, rgba(164,191,255,0.18) 0%, rgba(124,155,255,0.1) 100%);
+    }
+    .btn-ghost {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.86);
+      backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
+    }
+    .btn-ghost:hover {
+      transform: translateY(-1px);
+      border-color: rgba(118,199,255,0.42);
+      background:
+        linear-gradient(180deg, rgba(54,123,255,0.92) 0%, rgba(29,103,238,0.88) 54%, rgba(17,82,208,0.84) 100%),
+        linear-gradient(180deg, rgba(122,215,255,0.12) 0%, rgba(72,199,194,0.06) 100%);
+      color: #f8fbff;
+      box-shadow:
+        0 14px 28px rgba(0,0,0,0.22),
+        0 0 0 1px rgba(255,255,255,0.1) inset,
+        0 0 20px rgba(72,199,194,0.1);
+    }
+  </style>
+</head>
+<body class="font-sans antialiased text-white">
+
+  <section class="cta-strip py-14 sm:py-16 px-4 sm:px-8">
+    <div class="max-w-5xl mx-auto">
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-10">
+        <div class="text-center lg:text-left fade-up d1 max-w-2xl">
+          <p class="section-kicker mb-4">See It in Your Business</p>
+          <h3 class="text-[1.85rem] sm:text-3xl md:text-[2.2rem] font-black text-white leading-tight mb-3">
+            How Many <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Leads</span>
+            Are You <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Losing</span> Each Month?
+          </h3>
+          <h4 class="text-2xl sm:text-3xl font-black text-white leading-tight mb-4">
+            What Would an Extra
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400"> +$5K/Month </span>
+            Do For You?
+          </h4>
+          <p class="text-sm sm:text-base text-slate-400 leading-relaxed max-w-xl">
+            In 30 minutes, we&rsquo;ll show you exactly where you&rsquo;re losing leads — and how to turn them into consistent paying customers.
+          </p>
+        </div>
+
+        <div class="flex flex-col items-center lg:items-end gap-4 shrink-0 fade-up d2 w-full lg:w-auto">
+          <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+            <a href="#" class="btn-primary px-8 py-4 rounded-full text-sm font-bold text-white text-center">
+              Get Your Free Plan
+            </a>
+            <a href="#" class="btn-ghost px-8 py-4 rounded-full text-sm font-semibold text-center">
+              View Pricing
+            </a>
+          </div>
+          <div class="flex flex-wrap items-center justify-center lg:justify-end gap-4 text-xs text-slate-500">
+            <span class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              No credit card
+            </span>
+            <span class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              30-min session
+            </span>
+            <span class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              No obligation
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

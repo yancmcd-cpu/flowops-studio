@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Section Preview — Results by Industry</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    body { background: #05070D; }
+    .section-kicker {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(72, 199, 194, 0.84);
+    }
+    .fade-up { animation: fadeUp 0.55s ease both; }
+    .d1{animation-delay:.05s}.d2{animation-delay:.12s}.d3{animation-delay:.19s}
+    .d4{animation-delay:.26s}.d5{animation-delay:.33s}.d6{animation-delay:.40s}
+    .d7{animation-delay:.47s}.d8{animation-delay:.54s}
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+    .ind-card:hover { border-color: rgba(59,130,246,0.35); transform: translateY(-2px); }
+    .ind-card { transition: all 0.2s ease; }
+    .basis-badge {
+      font-size: 10px;
+      letter-spacing: 0.02em;
+      color: rgba(148,163,184,0.6);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      margin-top: 14px;
+      padding-top: 10px;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased text-white">
+
+<section class="bg-[#05070D] py-16 sm:py-24 px-4 sm:px-8 lg:px-12 border-b border-white/5">
+  <div class="max-w-7xl mx-auto">
+
+    <!-- Heading -->
+    <div class="text-center mb-8 sm:mb-10 fade-up d1">
+      <div class="section-kicker mb-5">
+        Results Across Industries
+      </div>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight px-2">
+        Works in Any Industry That
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400"> Relies on Leads</span>
+      </h2>
+      <p class="mt-5 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto px-2">
+        FlowOps AI systems deliver measurable results wherever inbound leads need fast, consistent handling.
+      </p>
+    </div>
+
+    <!-- BENCHMARK CALLOUT -->
+    <div class="fade-up d2 mb-10 sm:mb-14 rounded-2xl border border-blue-500/20 p-5 sm:p-7 relative overflow-hidden"
+      style="background: linear-gradient(135deg, rgba(8,17,35,0.9), rgba(14,28,55,0.8)); backdrop-filter: blur(12px);">
+      <div class="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 relative z-10">
+
+        <!-- Stat -->
+        <div class="flex-shrink-0 text-center sm:text-left sm:border-r sm:border-white/10 sm:pr-7">
+          <div class="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">391%</div>
+          <div class="text-xs text-slate-400 mt-1 font-semibold">more conversions</div>
+        </div>
+
+        <!-- Explanation -->
+        <div class="sm:pl-2">
+          <p class="text-sm sm:text-base font-semibold text-white mb-1.5">
+            Businesses that respond to a lead within <span class="text-cyan-400">60 seconds</span> convert at 3–4× the industry average.
+          </p>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+            Most small businesses take <span class="text-slate-300 font-semibold">47+ hours</span> to reply to an inbound lead.
+            By the time they do, the lead has moved on. FlowOps closes that gap — on every channel, every time.
+            The industry figures below are calculated using this benchmark applied to typical lead volumes and average job values per sector.
+          </p>
+          <p class="text-xs text-slate-600 mt-3">Source: Velocify · HubSpot Lead Response Management Study</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Industry grid — 2 col mobile, 3 col md -->
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 mb-10 sm:mb-14">
+
+      <!-- 1. Home Services Trades -->
+      <div class="ind-card fade-up d3 rounded-2xl border border-white/5 p-4 sm:p-6 cursor-default"
+        style="background: rgba(8,17,31,0.65); backdrop-filter: blur(10px);">
+        <div class="text-xl sm:text-2xl mb-3">🔧</div>
+        <h4 class="text-sm sm:text-base font-bold text-white mb-0.5">Home Services Trades</h4>
+        <p class="text-[10px] sm:text-xs text-slate-500 mb-3">HVAC · Plumbing · Electricians</p>
+        <div class="space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-slate-400">Additional revenue</span>
+            <span class="text-xs sm:text-sm text-cyan-400 font-bold">+$6,400/mo</span>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-slate-400">Extra jobs/month</span>
+            <span class="text-xs sm:text-sm text-cyan-400 font-bold">+20 jobs</span>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-slate-400">Admin time saved</span>
+            <span class="text-xs sm:text-sm text-cyan-400 font-bold">15 hrs/wk</span>
+          </div>
+        </div>
+        <div class="basis-badge">Based on 80 leads/mo · avg job $320</div>
+      </div>
+
+      <!-- 2. Real Estate & Rentals -->
+      <div class="ind-card fade-up d4 rounded-2xl border border-white/5 p-4 sm:p-6 cursor-default"
+        style="background: rgba(8,17,31,0.65); backdrop-filter: blur(10px);">
+        <div class="text-xl sm:text-2xl mb-3">🏠</div>
+        <h4 class="text-sm sm:text-base font-bold text-white mb-0.5">Real Estate & Rentals</h4>
+        <p class="text-[10px] sm:text-xs text-slate-500 mb-3">Agents · Rental agencies</p>
+        <div class="space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-slate-400">Additional revenue</span>
+            <span class="text-xs sm:text-sm text-cyan-400 font-bold">+$19,200/mo</span>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-slate-400">Extra closings/mo</span>
+            <span class="text-xs sm:text-sm text-cyan-400 font-bold">+6 deals</span>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-slate-400">After-hours coverage</span>
+            <span class="text-xs sm:text-sm text-cyan-400 font-bold">24 / 7</span>
+          </div>
+        </div>
+        <div class="basis-badge">Based on 50 enquiries/mo · avg deal $3,200</div>
+      </div>
+
+      <!-- 3. Cleaning, Painting & Renos -->
+      <div class="ind-card fade-up d5 rounded-2xl border border-white/5 p-4 sm:p-6 cursor-default"
+        style="background: rgba(8,17,31,0.65); backdrop-filter: blur(10px);">
+        <div class="text-xl sm:text-2xl mb-3">🎨</div>
+        <h4 class="text-sm sm:text-base font-bold text-white mb-0.5">Cleaning, Painting & Renos</h4>
+        <p class="text-[10px] sm:text-xs text-slate-500 mb-3">Cleaning · Painting · Renovations</p>
+        <div class="space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-slate-400">Additional revenue</span>
+            <span class="text-xs sm:text-sm text-cyan-400 font-bold">+$5,760/mo</span>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-slate-400">Extra bookings/mo</span>
+            <span class="text-xs sm:text-sm text-cyan-400 font-bold">+12 jobs</span>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-slate-400">No-show reduction</span>
+            <span class="text-xs sm:text-sm text-cyan-400 font-bold">−65%</span>
+          </div>
+        </div>
+        <div class="basis-badge">Based on 60 leads/mo · avg job $480</div>
+      </div>
+
+      <!-- 4. Premium Home Installs -->
+      <div class="ind-card fade-up d6 rounded-2xl border border-white/5 p-4 sm:p-6 cursor-default"
+        style="background: rgba(8,17,31,0.65); backdrop-filter: blur(10px);">
+        <div class="text-xl sm:text-2xl mb-3">💎</div>
+        <h4 class="text-sm sm:text-base font-bold text-white mb-0.5">Premium Home Installs</h4>
+        <p class="text-[10px] sm:text-xs text-slate-500 mb-3">Pools · Home cinema · Bespoke builds</p>
+        <div class="space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-slate-400">Additional revenue</span>
+            <span class="text-xs sm:text-sm text-cyan-400 font-bold">+$34,000/mo</span>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-slate-400">Extra projects/mo</span>
+            <span class="text-xs sm:text-sm text-cyan-400 font-bold">+4 projects</span>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-slate-400">Missed leads</span>
+            <span class="text-xs sm:text-sm text-cyan-400 font-bold">Zero</span>
+          </div>
+        </div>
+        <div class="basis-badge">Based on 25 enquiries/mo · avg project $8,500</div>
+      </div>
+
+      <!-- 5. Coaches, Agencies & Local Biz -->
+      <div class="ind-card fade-up d7 rounded-2xl border border-white/5 p-4 sm:p-6 cursor-default"
+        style="background: rgba(8,17,31,0.65); backdrop-filter: blur(10px);">
+        <div class="text-xl sm:text-2xl mb-3">🎯</div>
+        <h4 class="text-sm sm:text-base font-bold text-white mb-0.5">Coaches, Agencies & Local Biz</h4>
+        <p class="text-[10px] sm:text-xs text-slate-500 mb-3">Coaches · Legal · Gyms · Auto</p>
+        <div class="space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-slate-400">Additional revenue</span>
+            <span class="text-xs sm:text-sm text-cyan-400 font-bold">+$11,400/mo</span>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-slate-400">New clients/mo</span>
+            <span class="text-xs sm:text-sm text-cyan-400 font-bold">+12 clients</span>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-slate-400">Leads lost to competitors</span>
+            <span class="text-xs sm:text-sm text-cyan-400 font-bold">−50%</span>
+          </div>
+        </div>
+        <div class="basis-badge">Based on 70 leads/mo · avg client LTV $950</div>
+      </div>
+
+      <!-- 6. Cosmetic & Medical Clinics -->
+      <div class="ind-card fade-up d8 rounded-2xl border border-blue-500/20 p-4 sm:p-6 cursor-default"
+        style="background: rgba(8,17,31,0.75); backdrop-filter: blur(10px); box-shadow: 0 0 30px -10px rgba(59,130,246,0.12);">
+        <div class="text-xl sm:text-2xl mb-3">💆</div>
+        <h4 class="text-sm sm:text-base font-bold text-white mb-0.5">Cosmetic & Medical Clinics</h4>
+        <p class="text-[10px] sm:text-xs text-slate-500 mb-3">Med spa · Cosmetic · Dental</p>
+        <div class="space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-slate-400">Additional revenue</span>
+            <span class="text-xs sm:text-sm text-cyan-400 font-bold">+$9,660/mo</span>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-slate-400">Extra appointments/mo</span>
+            <span class="text-xs sm:text-sm text-cyan-400 font-bold">+23 bookings</span>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-slate-400">Appointment no-shows</span>
+            <span class="text-xs sm:text-sm text-cyan-400 font-bold">−75%</span>
+          </div>
+        </div>
+        <div class="basis-badge">Based on 90 enquiries/mo · avg booking $420</div>
+      </div>
+
+    </div>
+
+    <!-- Bottom stat bar -->
+    <div class="fade-up d7 rounded-2xl border border-white/5 p-6 sm:p-8"
+      style="background: rgba(8,17,31,0.5); backdrop-filter: blur(10px);">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+        <div>
+          <div class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">3.2×</div>
+          <div class="text-xs text-slate-500 mt-1 font-semibold">More lead conversions</div>
+        </div>
+        <div>
+          <div class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">2×</div>
+          <div class="text-xs text-slate-500 mt-1 font-semibold">More jobs from same ad spend</div>
+        </div>
+        <div>
+          <div class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">24/7</div>
+          <div class="text-xs text-slate-500 mt-1 font-semibold">System uptime — no days off</div>
+        </div>
+        <div>
+          <div class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Zero</div>
+          <div class="text-xs text-slate-500 mt-1 font-semibold">Leads left unanswered</div>
+        </div>
+      </div>
+      <p class="text-center text-[10px] text-slate-700 mt-6">
+        Figures based on conversion rate uplift from sub-60s AI response applied to industry-average lead volumes. Source: Velocify, HubSpot.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Preview nav -->
+<div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3
+  bg-[#08111F]/90 backdrop-blur-md border border-white/10 rounded-xl sm:rounded-2xl shadow-2xl
+  text-xs font-bold text-slate-400 uppercase tracking-widest">
+  <span class="text-cyan-400">●</span>
+  <span class="hidden sm:inline">Results by Industry</span>
+  <span class="sm:hidden">Results</span>
+  <span class="text-white/20">|</span>
+  <a href="/preview-workflow.html" class="text-blue-400 hover:text-blue-300 transition-colors">← Workflow</a>
+  <span class="text-white/20">|</span>
+  <a href="/preview-revenue-cta.html" class="text-blue-400 hover:text-blue-300 transition-colors">CTA →</a>
+</div>
+
+</body>
+</html>

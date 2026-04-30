@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Section Preview — Revenue Impact</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    body { background: #05070D; }
+    .section-kicker {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(72, 199, 194, 0.84);
+    }
+    .fade-up { animation: fadeUp 0.55s ease both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.2s; }
+    .d3 { animation-delay: 0.35s; }
+    .d4 { animation-delay: 0.5s; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased text-white">
+
+  <section class="bg-[#05070D] py-16 sm:py-24 px-4 sm:px-8 lg:px-12 border-b border-white/5">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Heading -->
+      <div class="text-center mb-12 sm:mb-20 fade-up d1">
+          <div class="section-kicker mb-5">
+            Revenue Impact
+          </div>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight px-2">
+          What Does This Actually
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400"> Mean in Revenue?</span>
+        </h2>
+        <p class="mt-5 text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto px-2">
+          A local service business running <strong class="text-white">100–150 leads/month</strong> sees this kind of shift when FlowOps AI systems are deployed.
+        </p>
+      </div>
+
+      <!-- Before / After Revenue Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12 fade-up d2">
+
+        <!-- BEFORE -->
+        <div class="relative rounded-2xl sm:rounded-3xl border border-white/5 overflow-hidden p-6 sm:p-10"
+          style="background: rgba(8,17,31,0.4); backdrop-filter: blur(10px);">
+          <div class="absolute top-0 left-0 w-1 h-full rounded-l-2xl sm:rounded-l-3xl" style="background: rgba(127,29,29,0.6);"></div>
+
+          <div class="flex items-center gap-3 pl-3 sm:pl-4 mb-6 sm:mb-8">
+            <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-red-500 animate-pulse"></span>
+            <span class="text-xs font-bold uppercase tracking-[0.2em] text-red-400">Before FlowOps</span>
+          </div>
+
+          <div class="pl-3 sm:pl-4 space-y-5 sm:space-y-6">
+            <div class="flex items-baseline gap-2 sm:gap-3">
+              <span class="text-4xl sm:text-5xl font-black text-white">~13</span>
+              <span class="text-slate-400 text-base sm:text-lg">jobs closed / month</span>
+            </div>
+
+            <div class="text-sm text-slate-500">
+              From 100–150 inbound leads, only <span class="text-slate-300 font-semibold">~9% convert</span> — slow response, missed follow-ups, no system.
+            </div>
+
+            <div class="space-y-3 border-t border-white/5 pt-5 sm:pt-6">
+              <div class="flex items-center justify-between text-sm gap-4">
+                <span class="text-slate-400">Lead response time</span>
+                <span class="text-red-400 font-semibold text-right">Hours – days</span>
+              </div>
+              <div class="flex items-center justify-between text-sm gap-4">
+                <span class="text-slate-400">Follow-up sequences</span>
+                <span class="text-red-400 font-semibold text-right">None / manual</span>
+              </div>
+              <div class="flex items-center justify-between text-sm gap-4">
+                <span class="text-slate-400">After-hours coverage</span>
+                <span class="text-red-400 font-semibold text-right">Zero</span>
+              </div>
+              <div class="flex items-center justify-between text-sm gap-4">
+                <span class="text-slate-400">Admin hours/week</span>
+                <span class="text-red-400 font-semibold text-right">+15 hrs manual</span>
+              </div>
+            </div>
+
+            <div class="mt-2 rounded-xl sm:rounded-2xl border border-red-500/15 p-4 sm:p-5"
+              style="background: rgba(127,29,29,0.08);">
+              <p class="text-xs font-bold uppercase tracking-widest text-red-400 mb-2">Monthly Revenue</p>
+              <p class="text-2xl sm:text-3xl font-black text-white">$2,000 – $6,500</p>
+              <p class="text-xs text-slate-500 mt-1">Based on avg deal value $150–500</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- AFTER -->
+        <div class="relative rounded-2xl sm:rounded-3xl border border-blue-500/25 overflow-hidden p-6 sm:p-10"
+          style="background: rgba(8,17,31,0.65); backdrop-filter: blur(10px); box-shadow: 0 0 60px -15px rgba(59,130,246,0.25);">
+          <div class="absolute top-0 left-0 w-1 h-full rounded-l-2xl sm:rounded-l-3xl bg-gradient-to-b from-blue-400 to-cyan-500"></div>
+          <div class="absolute top-0 right-0 w-48 sm:w-64 h-48 sm:h-64 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div class="flex items-center gap-3 pl-3 sm:pl-4 mb-6 sm:mb-8 relative z-10">
+            <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-blue-400"></span>
+            <span class="text-xs font-bold uppercase tracking-[0.2em] text-blue-400">After FlowOps</span>
+          </div>
+
+          <div class="pl-3 sm:pl-4 space-y-5 sm:space-y-6 relative z-10">
+            <div class="flex items-baseline gap-2 sm:gap-3">
+              <span class="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">~32</span>
+              <span class="text-slate-300 text-base sm:text-lg">jobs closed / month</span>
+            </div>
+
+            <div class="text-sm text-slate-400">
+              Same 100–150 leads — now <span class="text-white font-semibold">~22% convert</span> with instant AI response, automated follow-up, and 24/7 coverage.
+            </div>
+
+            <div class="space-y-3 border-t border-white/5 pt-5 sm:pt-6">
+              <div class="flex items-center justify-between text-sm gap-4">
+                <span class="text-slate-400">Lead response time</span>
+                <span class="text-cyan-400 font-semibold text-right">&lt; 60 seconds</span>
+              </div>
+              <div class="flex items-center justify-between text-sm gap-4">
+                <span class="text-slate-400">Follow-up sequences</span>
+                <span class="text-cyan-400 font-semibold text-right">7-touch automated</span>
+              </div>
+              <div class="flex items-center justify-between text-sm gap-4">
+                <span class="text-slate-400">After-hours coverage</span>
+                <span class="text-cyan-400 font-semibold text-right">24 / 7</span>
+              </div>
+              <div class="flex items-center justify-between text-sm gap-4">
+                <span class="text-slate-400">Admin hours/week</span>
+                <span class="text-cyan-400 font-semibold text-right">Fully automated</span>
+              </div>
+            </div>
+
+            <div class="mt-2 rounded-xl sm:rounded-2xl border border-blue-500/25 p-4 sm:p-5"
+              style="background: rgba(59,130,246,0.08);">
+              <p class="text-xs font-bold uppercase tracking-widest text-blue-400 mb-2">Monthly Revenue</p>
+              <p class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">$4,800 – $16,000</p>
+              <p class="text-xs text-slate-500 mt-1">Based on avg deal value $150–500</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Delta Impact Row -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 fade-up d3">
+
+        <div class="rounded-xl sm:rounded-2xl border border-white/5 p-5 sm:p-7 text-center"
+          style="background: rgba(8,17,31,0.6); backdrop-filter: blur(8px);">
+          <div class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-1">+19 jobs</div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500">per month</div>
+          <p class="mt-2 sm:mt-3 text-xs text-slate-500">More closed deals from the exact same lead volume</p>
+        </div>
+
+        <div class="rounded-xl sm:rounded-2xl border border-cyan-500/25 p-5 sm:p-7 text-center"
+          style="background: rgba(8,17,31,0.7); backdrop-filter: blur(8px); box-shadow: 0 0 30px -10px rgba(6,182,212,0.2);">
+          <div class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-1">+$2.8K – $9.5K</div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500">extra revenue / month</div>
+          <p class="mt-2 sm:mt-3 text-xs text-slate-500">Pure upside — no extra ad spend required</p>
+        </div>
+
+        <div class="rounded-xl sm:rounded-2xl border border-white/5 p-5 sm:p-7 text-center"
+          style="background: rgba(8,17,31,0.6); backdrop-filter: blur(8px);">
+          <div class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-1">~15 hrs</div>
+          <div class="text-xs font-bold uppercase tracking-widest text-slate-500">saved per week</div>
+          <p class="mt-2 sm:mt-3 text-xs text-slate-500">Admin and follow-up handled entirely by AI</p>
+        </div>
+
+      </div>
+
+      <!-- Fine print -->
+      <p class="text-center text-xs text-slate-600 mt-6 sm:mt-8 fade-up d4 px-4">
+        * Projections based on industry conversion benchmarks for local service businesses (HVAC, plumbing, cleaning, landscaping, etc.) with 100–150 monthly leads.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- Preview nav banner -->
+  <div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3
+    bg-[#08111F]/90 backdrop-blur-md border border-white/10 rounded-xl sm:rounded-2xl shadow-2xl
+    text-xs font-bold text-slate-400 uppercase tracking-widest">
+    <span class="text-cyan-400">●</span>
+    <span class="hidden sm:inline">Section Preview — Revenue Impact</span>
+    <span class="sm:hidden">Revenue Impact</span>
+    <span class="text-white/20">|</span>
+    <a href="/preview-conversion-metrics.html" class="text-blue-400 hover:text-blue-300 transition-colors">← Prev</a>
+  </div>
+
+</body>
+</html>

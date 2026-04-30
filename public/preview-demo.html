@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Section Preview — AI Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    body { background: #05070D; }
+    .section-kicker {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(72, 199, 194, 0.84);
+    }
+
+    /* Pulse ring animation for the voice agent orb */
+    @keyframes ping-slow {
+      0%   { transform: scale(1);   opacity: 0.4; }
+      70%  { transform: scale(1.6); opacity: 0; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+    .animate-ping-slow { animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
+
+    @keyframes ping-slow-2 {
+      0%   { transform: scale(1);   opacity: 0.25; }
+      70%  { transform: scale(1.35);opacity: 0; }
+      100% { transform: scale(1.35);opacity: 0; }
+    }
+    .animate-ping-slow-2 { animation: ping-slow-2 2.4s cubic-bezier(0, 0, 0.2, 1) infinite 0.3s; }
+
+    /* Chat message fade-in */
+    @keyframes msg-in {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .msg-1 { animation: msg-in 0.4s ease forwards; }
+    .msg-2 { animation: msg-in 0.4s ease forwards 1.4s; opacity:0; }
+    .msg-3 { animation: msg-in 0.4s ease forwards 3s; opacity:0; }
+  </style>
+</head>
+
+<body class="font-sans antialiased text-white">
+
+  <!-- ══════════════════════════════════════════════
+       SECTION: Try the AI System Yourself
+       ══════════════════════════════════════════════ -->
+  <section class="bg-[#05070D] py-24 px-6 sm:px-12 border-t border-white/5 min-h-screen">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Heading -->
+      <div class="text-center mb-16">
+        <div class="section-kicker mb-6">
+          Live Systems
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold tracking-tight leading-tight">
+          Try the <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">AI System Yourself</span>
+        </h2>
+        <p class="mt-6 text-lg md:text-xl text-slate-400 max-w-2xl mx-auto">
+          Interact with our AI to see how it captures, qualifies, and books leads automatically.
+        </p>
+      </div>
+
+      <!-- Two panels -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+
+        <!-- ─── LEFT: Voice Agent ─── -->
+        <div class="bg-[#08111F]/60 backdrop-blur-sm rounded-[2.5rem] border border-white/5 p-8 shadow-2xl relative overflow-hidden flex flex-col items-center justify-center min-h-[550px]">
+          <!-- subtle top glow -->
+          <div class="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-transparent pointer-events-none rounded-[2.5rem]"></div>
+          <!-- top-left corner accent -->
+          <div class="absolute top-0 left-0 w-32 h-32 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div class="relative z-10 text-center space-y-10 w-full max-w-sm">
+            <div class="text-xs font-bold text-blue-400 uppercase tracking-[0.3em]">AI Voice Assistant</div>
+
+            <!-- Pulsing orb -->
+            <div class="flex items-center justify-center">
+              <div class="relative">
+                <div class="absolute inset-0 rounded-full bg-blue-500/20 animate-ping-slow"></div>
+                <div class="absolute inset-0 rounded-full bg-blue-500/30 animate-ping-slow-2"></div>
+                <div class="relative w-32 h-32 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center shadow-[0_0_60px_-5px_rgba(37,99,235,0.5)]">
+                  <svg class="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                      d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Copy -->
+            <div class="space-y-3">
+              <h4 class="text-2xl font-bold text-white">Call Our AI Agent</h4>
+              <p class="text-sm text-slate-400 leading-relaxed">Experience high-speed voice qualification and instant scheduling over the phone.</p>
+            </div>
+
+            <!-- CTA -->
+            <button class="group relative w-full px-8 py-5 bg-white text-slate-950 font-black rounded-2xl transition-all hover:bg-blue-50 hover:shadow-[0_0_30px_-5px_rgba(255,255,255,0.3)] flex items-center justify-center gap-3 active:scale-95">
+              <span class="uppercase tracking-widest text-xs">Start Voice Call</span>
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ─── RIGHT: Chat Assistant ─── -->
+        <div class="bg-[#08111F]/60 backdrop-blur-sm rounded-[2.5rem] border border-white/5 p-4 sm:p-6 shadow-2xl relative flex flex-col min-h-[550px]">
+          <!-- Inner chat window -->
+          <div class="flex-grow bg-[#05070D]/80 rounded-[2rem] border border-white/8 overflow-hidden flex flex-col shadow-inner">
+
+            <!-- Header bar -->
+            <div class="p-5 border-b border-white/5 bg-[#08111F]/60 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-cyan-500 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+                  <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                  </svg>
+                </div>
+                <div>
+                  <span class="text-xs font-bold tracking-widest uppercase block text-white">Chat Assistant</span>
+                  <span class="text-[10px] text-cyan-400 flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse"></span> Online
+                  </span>
+                </div>
+              </div>
+              <!-- three dots decoration -->
+              <div class="flex gap-1">
+                <div class="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+              </div>
+            </div>
+
+            <!-- Messages -->
+            <div class="flex-grow p-5 space-y-4 overflow-y-auto" id="chat-body">
+
+              <!-- Bot msg 1 -->
+              <div class="flex items-end gap-2 msg-1">
+                <div class="w-7 h-7 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center shrink-0">
+                  <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div class="bg-[#0e1c33]/80 backdrop-blur-sm p-4 rounded-2xl rounded-bl-sm border border-white/5 text-xs text-slate-300 max-w-[85%] leading-relaxed shadow-sm">
+                  Hi! 👋 I'm the AI assistant for FlowOps. I handle 100% of enquiries instantly. How can I help you today?
+                </div>
+              </div>
+
+              <!-- User msg -->
+              <div class="flex items-end flex-row-reverse gap-2 msg-2">
+                <div class="w-7 h-7 rounded-full bg-blue-600/30 border border-blue-500/30 flex items-center justify-center shrink-0">
+                  <svg class="w-3.5 h-3.5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+                <div class="bg-blue-600/20 p-4 rounded-2xl rounded-br-sm border border-blue-500/20 text-xs text-slate-200 max-w-[85%] shadow-sm">
+                  How does the automation handle out-of-hours leads?
+                </div>
+              </div>
+
+              <!-- Bot msg 2 -->
+              <div class="flex items-end gap-2 msg-3">
+                <div class="w-7 h-7 rounded-full bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center shrink-0">
+                  <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div class="bg-[#0e1c33]/80 backdrop-blur-sm p-4 rounded-2xl rounded-bl-sm border border-white/5 text-xs text-slate-300 max-w-[85%] leading-relaxed shadow-sm">
+                  Instantly! ⚡ Even at 3 AM, I respond in under 60 seconds, qualify the lead, and book them into your calendar for the next available slot.
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Input bar -->
+            <div class="p-4 bg-[#08111F]/40 border-t border-white/5">
+              <div class="bg-[#05070D]/80 border border-white/10 rounded-xl p-2.5 flex items-center justify-between gap-3">
+                <span class="text-[10px] text-slate-600 pl-2 uppercase tracking-widest font-bold flex-grow">Type a message...</span>
+                <button class="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-600/20 hover:bg-blue-500 transition-colors shrink-0">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- /Two panels -->
+
+      <!-- Three trust icons below -->
+      <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto border-t border-white/5 pt-12">
+        <div class="flex items-center gap-4 text-slate-400 group">
+          <div class="w-10 h-10 rounded-full bg-[#08111F] border border-white/5 flex items-center justify-center shrink-0 group-hover:border-cyan-500/50 transition-colors">
+            <svg class="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <span class="text-sm font-medium">Ask questions about your business</span>
+        </div>
+        <div class="flex items-center gap-4 text-slate-400 group">
+          <div class="w-10 h-10 rounded-full bg-[#08111F] border border-white/5 flex items-center justify-center shrink-0 group-hover:border-cyan-500/50 transition-colors">
+            <svg class="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <span class="text-sm font-medium">See real-time responses and qualification</span>
+        </div>
+        <div class="flex items-center gap-4 text-slate-400 group">
+          <div class="w-10 h-10 rounded-full bg-[#08111F] border border-white/5 flex items-center justify-center shrink-0 group-hover:border-cyan-500/50 transition-colors">
+            <svg class="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <span class="text-sm font-medium">Experience automated booking flow</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Preview nav banner -->
+  <div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-5 py-3 bg-[#08111F]/90 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl text-xs font-bold text-slate-400 uppercase tracking-widest">
+    <span class="text-cyan-400">●</span> Section Preview — AI Demo
+    <span class="text-white/20">|</span>
+    <a href="/preview-demo.html" class="text-blue-400 hover:text-blue-300">Demo</a>
+  </div>
+
+</body>
+</html>
